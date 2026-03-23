@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +12,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:#0a0a0f;color:#fff;font-family:'Barlow Condensed',sans-serif;min-height:100vh;overscroll-behavior:none}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
 #header{position:sticky;top:0;z-index:100;padding:env(safe-area-inset-top,0px) 16px 14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .3s,background .3s}
 #header-inner{max-width:660px;margin:0 auto;padding-top:12px}
 .tag-row{display:flex;align-items:baseline;gap:10px;margin-bottom:3px}
@@ -69,6 +67,12 @@ h1 span{transition:color .3s}
 .b-weight{background:rgba(100,180,255,.1);color:#64b4ff;border:1px solid rgba(100,180,255,.2)}
 .b-prog{background:rgba(255,100,100,.1);color:#ff7070;border:1px solid rgba(255,100,100,.2)}
 .b-pull{background:rgba(160,100,255,.1);color:#b47dff;border:1px solid rgba(160,100,255,.2)}
+/* Daily push-up banner */
+.pushday-banner{border-radius:12px;padding:12px 14px;margin-bottom:9px;display:flex;align-items:center;gap:11px}
+.pushday-icon{font-size:22px;flex-shrink:0}
+.pushday-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+.pushday-sub{font-size:10px;font-family:'Barlow';color:#666;line-height:1.4}
+/* Stretch banner */
 .str-banner{background:linear-gradient(135deg,rgba(100,220,150,.07) 0%,#0e0e18 100%);border:1px solid rgba(100,220,150,.18);border-radius:11px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:center;gap:10px}
 .str-icon{font-size:20px}
 .str-title{font-size:12px;font-weight:700;color:#64dc96;letter-spacing:1px;text-transform:uppercase}
@@ -94,7 +98,7 @@ h1 span{transition:color .3s}
   <div id="header-inner">
     <div class="tag-row">
       <span class="tag" id="hdr-tag">7-Day Program</span>
-      <span class="sub">• Age 14 • 122 lbs</span>
+      <span class="sub">Age 14 - 122 lbs</span>
     </div>
     <h1>Height. Muscle. Strength. <span id="hdr-accent">Lets Go.</span></h1>
   </div>
@@ -113,36 +117,49 @@ h1 span{transition:color .3s}
   </div>
   <div id="wc-grid">
     <div class="wc-card">
-      <div class="wc-lbl" style="color:#FFD700">🪢 Warmup</div>
+      <div class="wc-lbl" style="color:#FFD700">Warmup</div>
       <div class="wc-name" id="wu-name"></div>
       <div class="wc-reps" id="wu-reps" style="color:#FFD700"></div>
       <div class="wc-note" id="wu-note"></div>
     </div>
     <div class="wc-card">
-      <div class="wc-lbl" style="color:#00E5FF">🏃 Cardio</div>
+      <div class="wc-lbl" style="color:#00E5FF">Cardio</div>
       <div class="wc-name" id="ca-name"></div>
       <div class="wc-reps" id="ca-reps" style="color:#00E5FF"></div>
       <div class="wc-note" id="ca-note"></div>
     </div>
   </div>
   <div id="prog-container"></div>
+
+  <!-- Daily Push-Up Practice -->
+  <div id="pushday-banner-container"></div>
   <div class="sec-hdr">
-    <div class="sec-lbl">💥 Main Workout</div>
-    <div class="sec-hint">Tap any exercise for how-to ▼</div>
+    <div class="sec-lbl" id="push-sec-lbl">Daily Push-Up Practice</div>
+    <div class="sec-hint">Tap for how-to</div>
+  </div>
+  <div class="ex-list" id="push-list"></div>
+
+  <!-- Main Workout -->
+  <div class="sec-hdr">
+    <div class="sec-lbl">Main Workout</div>
+    <div class="sec-hint">Tap any exercise for how-to</div>
   </div>
   <div class="ex-list" id="ex-list"></div>
+
+  <!-- Height Stretches -->
   <div class="str-banner">
     <div class="str-icon">🌿</div>
     <div>
       <div class="str-title">Daily Height Stretches</div>
-      <div class="str-sub">Every day — decompresses spine, maximizes posture and height</div>
+      <div class="str-sub">Every day - decompresses spine and maximizes posture</div>
     </div>
   </div>
   <div class="sec-hdr">
-    <div class="sec-lbl" style="color:#64dc96">🧘 Stretch Routine</div>
-    <div class="sec-hint">Tap for how-to ▼</div>
+    <div class="sec-lbl" style="color:#64dc96">Stretch Routine</div>
+    <div class="sec-hint">Tap for how-to</div>
   </div>
   <div class="ex-list" id="str-list"></div>
+
   <div id="cooldown">
     <span style="font-size:19px">🧊</span>
     <div>
@@ -150,217 +167,745 @@ h1 span{transition:color .3s}
       <div class="cool-txt" id="cd-txt"></div>
     </div>
   </div>
-  <div style="font-size:9px;letter-spacing:3px;color:#3a3a3a;font-weight:700;text-transform:uppercase;margin-bottom:11px">🔑 Success Keys</div>
+  <div style="font-size:9px;letter-spacing:3px;color:#3a3a3a;font-weight:700;text-transform:uppercase;margin-bottom:11px">Success Keys</div>
   <div id="tips-grid"></div>
-  <div id="footer"><span class="pulse">Track every rep • Sleep 9-10 hrs • Growth window is NOW 🌱</span></div>
+  <div id="footer"><span class="pulse">Track every rep - Sleep 9-10 hrs - Growth window is NOW</span></div>
 </div>
+
 <script>
-const PUSHUP_STEPS=["Wall Push-Up","Board High Incline","Board Mid Incline","Board Low Incline","Kneeling Full","Negative Only (5 sec)","Half Push-Up","Full Push-Up","Board Diamond","Archer Push-Up"];
-const PULLUP_STEPS=["Dead Hang Hold","Scapular Pull","Band-Assisted","Jumping + Slow Lower","Negative Pull-Up","Half Pull-Up","Full Pull-Up","Chin-Up","Chest-to-Bar"];
-let pushupLevel=parseInt(localStorage.getItem('pul')||'0');
-let pullupLevel=parseInt(localStorage.getItem('pull')||'0');
- 
-const STRETCHES=[
-  {name:"Dead Hang",sets:"3",reps:"20–30 sec",note:"Best spine decompressor AND pull-up builder",badge:"pull",
-   how:"Jump up and hang from a bar with both hands completely loose. Let your whole body relax and stretch downward. Don't pull up — just hang and let gravity do the work. This decompresses every disc in your spine and is the single best daily habit for both height and pull-up progress. Build toward 30 seconds each set."},
-  {name:"Cobra Stretch",sets:"3",reps:"30 sec hold",note:"Opens and lengthens your spine",badge:"",
-   how:"Lie face down, hands flat under shoulders. Press your upper body up while keeping hips and legs on the floor. Look up, let your back arch naturally. Feel the stretch along your entire spine. Hold and breathe slowly — don't force it past comfort."},
-  {name:"Standing Forward Fold",sets:"3",reps:"30 sec",note:"Decompresses your lower spine",badge:"",
-   how:"Stand feet hip-width. Fold forward at the waist, letting your head and arms hang heavy. Bend your knees slightly if needed. Each exhale, sink a little deeper. Stretches your whole back chain and lower spine."},
-  {name:"Hip Flexor Lunge Stretch",sets:"2",reps:"40 sec each side",note:"Fixing this alone can make you look 1 inch taller",badge:"",
-   how:"Kneel right knee down, left foot forward. Push hips gently forward until you feel a deep stretch in the front of your right hip. Keep back tall. Breathe and relax deeper each exhale. Switch sides. Tight hip flexors tilt your pelvis causing a hunch — this corrects it."},
-  {name:"Cat-Cow Flow",sets:"2",reps:"10 slow reps",note:"Wakes up every vertebra",badge:"",
-   how:"On hands and knees. Cat: arch back toward ceiling, chin to chest. Cow: drop belly toward floor, lift head and tailbone. Flow slowly, 3 seconds each direction. Feel every part of your spine moving."},
-  {name:"Wall Posture Press",sets:"3",reps:"60 sec hold",note:"Bad posture costs you 1-2 inches — this fixes it",badge:"",
-   how:"Stand with heels, butt, upper back AND head all touching the wall at the same time. Try to press your lower back into the wall too. Hold 60 seconds. This retrains your posture muscles to keep you at your true full height."},
-  {name:"Lying Spinal Twist",sets:"2",reps:"30 sec each side",note:"Do this every night before bed",badge:"",
-   how:"Lie on your back, knees bent. Drop both knees slowly to the right while keeping shoulders flat on floor. Left arm out, look left. Feel the twist through your whole spine. Hold and breathe. Bring knees up, then drop left. Releases all the compression from the day."}
+var PUSHUP_STEPS = [
+  "Wall Push-Up",
+  "Green Grip (Pectoral)",
+  "Yellow Grip (Shoulder)",
+  "Red Grip (Lat/Wide)",
+  "Kneeling Full",
+  "Negative Only 5 sec",
+  "Half Push-Up",
+  "Full Push-Up",
+  "Blue Grip (Tricep)",
+  "Archer Push-Up"
 ];
- 
-const DAYS=[
-  // ── MONDAY: CHEST DAY ────────────────────────────────────────────
-  {day:"Monday",label:"CHEST DAY",focus:"Full Chest — Board + 5lb + Push-Up Progression",color:"#FF4D4D",emoji:"💪",
-   prog:{type:"pushup",title:"Push-Up Ladder — tap your current level to track progress"},
-   warmup:{name:"Jump Rope",reps:"500 jumps",note:"Easy pace — warm up wrists and chest"},
-   cardio:{name:"Treadmill",reps:"Burn 100 cal",note:"Light jog or brisk walk 3.5–4.5 mph"},
-   exercises:[
-    {name:"Wall Push-Up Activation",sets:"2",reps:"15",badge:"prog",note:"Always start here — activates chest before harder work",
-     how:"Stand arm's length from a wall, hands flat at chest height shoulder-width. Lean in slowly then push back. Keep body straight. Even though it looks easy, focus on FEELING your chest muscle activate. This primes your nervous system for harder push-up work and prevents injury."},
-    {name:"Board Push-Up — HIGH Incline",sets:"3",reps:"12–15",badge:"board",note:"Highest board setting — easiest — build reps here first",
-     how:"Set push-up board to the HIGHEST (most elevated) position. Hands on handles, feet on floor. Lower chest to board slowly — 2 seconds down — then press up. The higher the board the easier. Aim for 3 sets of 15. Once you can do 15 clean reps for 2 sessions in a row, drop to the MID setting next week."},
-    {name:"Board Push-Up — MID Incline",sets:"3",reps:"8–12",badge:"board",note:"Medium difficulty — work toward 12 clean reps",
-     how:"Move board to MIDDLE height. Same form — lower chest slowly, press up. Noticeably harder than high setting. Do what you can — even 5 reps is great. When you hit 12 clean reps for 2 sessions, move to the LOW setting."},
-    {name:"Board Push-Up — LOW Incline",sets:"2",reps:"5–8",badge:"board",note:"Hardest incline — close to a real floor push-up",
-     how:"Move board to LOWEST setting. This is close to doing a real push-up on the floor. Lower slowly, press up. If you can only do 3 reps, that is perfect — you are building toward the real thing. Over weeks these reps will climb."},
-    {name:"5lb Chest Fly",sets:"3",reps:"12",badge:"weight",note:"Lie on floor — wide arc — feel the chest stretch",
-     how:"Lie on your back, one 5lb weight in each hand, arms straight above chest. Slowly lower both arms wide to your sides like wings until elbows nearly touch the floor. Bring back together at the top. Go very slow on the way down. This builds the inner and outer chest muscle that makes push-ups easier."},
-    {name:"5lb Chest Press",sets:"3",reps:"12",badge:"weight",note:"Floor press — drive weights straight up",
-     how:"Lie on your back, one 5lb weight in each hand at chest height, elbows bent to 90 degrees and flared out. Press both weights straight up until arms are fully extended. Lower slowly back down. This is like a push-up but lying down — it directly trains your chest pressing muscles and is a great companion to your board work."},
-    {name:"Negative Push-Up",sets:"3",reps:"5–8",badge:"prog",note:"5 full seconds DOWN — fastest way to build push-up strength",
-     how:"Full push-up position — low board or floor, toes on floor, body perfectly straight. Lower yourself for 5 full seconds. You do NOT need to push back up — use knees to reset. Negatives build push-up strength faster than anything because the lowering phase causes the most muscle damage and growth. Do these even when you cannot do a single full push-up yet."}
-   ],
-   cooldown:"5 min light elliptical + chest doorway stretch 30 sec"},
- 
-  // ── TUESDAY: BACK + PULL-UP PROGRESSION ─────────────────────────
-  {day:"Tuesday",label:"BACK + PULL-UPS",focus:"Pull-Up Ladder + Full Back + 5lb Biceps",color:"#FF8C00",emoji:"🔥",
-   prog:{type:"pullup",title:"Pull-Up Ladder — tap your current level"},
-   warmup:{name:"Jump Rope",reps:"500 jumps",note:"Try double-unders if ready"},
-   cardio:{name:"Treadmill",reps:"Burn 100 cal",note:"Incline walk 5–8% grade"},
-   exercises:[
-    {name:"Dead Hang Hold",sets:"3",reps:"20–30 sec",badge:"pull",note:"Step 1 of pull-up progression — grip and hang strong",
-     how:"Jump up to your bar and hang with both hands. Keep shoulders slightly squeezed down — don't hang fully limp. Hold as long as you can. Builds grip strength and gets your body used to supporting its own weight. Also your best spine stretch. Start here before any pull-up work every session."},
-    {name:"Scapular Pull",sets:"3",reps:"8–10",badge:"pull",note:"Step 2 — teaches your back to start the pull",
-     how:"Hang from the bar. Without bending your elbows, squeeze your shoulder blades DOWN and TOGETHER — your body will rise maybe an inch. Then let them slide back up. That tiny movement is a scapular pull. It teaches your back muscles how to initiate a real pull-up. Do 8–10 per set."},
-    {name:"Jumping Pull-Up + Slow Lower",sets:"3",reps:"5–6",badge:"pull",note:"Step 3 — jump to top, lower in 5 full seconds",
-     how:"Jump up so your chin is above the bar. Now lower yourself down as slowly as possible — aim for 5 full seconds. Fight gravity the entire way. Don't just drop. These negatives are the fastest way to build pull-up strength. When you can do 6 solid slow negatives you are very close to your first real pull-up."},
-    {name:"5lb Bent-Over Row",sets:"4",reps:"12",badge:"weight",note:"Both arms — squeeze shoulder blades together at top",
-     how:"Hold a 5lb weight in each hand, hinge forward until torso is nearly parallel to floor. Let weights hang down. Pull BOTH elbows back toward hips at the same time, squeezing shoulder blades hard together at the top. Hold 1 second. Lower slowly. 4 sets of 12 — this directly builds the muscles used in pull-ups."},
-    {name:"5lb Single-Arm Row",sets:"3",reps:"10 each side",badge:"weight",note:"Elbow drives past your back — squeeze hard at top",
-     how:"Brace one hand on a chair, hold one 5lb weight, let it hang. Pull elbow up and back past your hip — think elbow to ceiling. Squeeze shoulder blade hard at top for 1 second. Lower slowly. 10 each side. Great for targeting each side of the back individually."},
-    {name:"5lb Bicep Curl",sets:"3",reps:"12",badge:"weight",note:"3 seconds DOWN — the slow phase builds muscle",
-     how:"Stand with a 5lb weight in each hand, palms forward, elbows pinned to sides. Curl both up to shoulders, squeeze hard, then lower VERY slowly — 3 full seconds down. Never let elbows swing forward. The slow lowering builds more muscle than the curl up and also helps with pull-ups."},
-    {name:"5lb Hammer Curl",sets:"3",reps:"12",badge:"weight",note:"Thumbs up — biceps AND thick forearms",
-     how:"Same as curl but thumbs pointing UP like hammers. Curl up, squeeze, lower slowly. Hits a different part of the bicep and builds forearms. Stronger forearms mean stronger grip for pull-ups."}
-   ],
-   cooldown:"5 min elliptical + bicep and lat stretch"},
- 
-  // ── WEDNESDAY: LEG DAY ──────────────────────────────────────────
-  {day:"Wednesday",label:"LEG DAY",focus:"Full Legs + Core — 5lb Everything",color:"#FFD700",emoji:"🦵",
-   prog:null,
-   warmup:{name:"Jump Rope",reps:"500 jumps",note:"High knees every 3rd set of 50"},
-   cardio:{name:"Treadmill",reps:"Burn 100 cal",note:"Jog at a comfortable pace"},
-   exercises:[
-    {name:"Bodyweight Squat",sets:"2",reps:"15",badge:"",note:"Perfect form first — then add weight",
-     how:"Feet shoulder-width, toes slightly out. Arms forward for balance. Sit back AND down — thighs parallel to floor or lower. Drive through heels to stand. Never let knees cave inward. Do 2 warm-up sets before the weighted squats."},
-    {name:"5lb Goblet Squat",sets:"4",reps:"12",badge:"weight",note:"Hold both 5lbs at chest — go as deep as possible",
-     how:"Press both 5lb weights together at your chest. Feet shoulder-width, toes slightly out. Squat as deep as you can — let elbows pass between knees at the bottom. Chest stays tall. Drive through heels to stand. 4 sets of 12 — main leg builder today."},
-    {name:"5lb Reverse Lunge",sets:"3",reps:"10 each leg",badge:"weight",note:"One 5lb each hand — front knee over ankle",
-     how:"Hold a 5lb weight in each hand at sides. Step one foot BACKWARD and lower back knee toward floor gently. Front knee stays above ankle. Push through front heel to return. Alternate legs. Torso stays upright."},
-    {name:"5lb Romanian Deadlift",sets:"3",reps:"12",badge:"weight",note:"Push hips BACK — feel the hamstring stretch deeply",
-     how:"Hold a 5lb weight in each hand in front of thighs. Push hips BACKWARD while sliding weights down your legs — back flat, weights close. Stop when you feel a deep stretch in the backs of your thighs. Drive hips forward to stand. Builds hamstrings and lower back — both important for posture and height."},
-    {name:"5lb Calf Raise",sets:"4",reps:"20",badge:"weight",note:"Rise AS HIGH as possible — full range every rep",
-     how:"Hold a 5lb weight in each hand. Rise onto tippy toes as HIGH as possible, hold 1 second at top, lower all the way back down slowly. If you have a step, hang heels off the edge for extra range. Calves need high reps to grow."},
-    {name:"Plank with 5lb on Back",sets:"3",reps:"30–45 sec",badge:"weight",note:"Place one 5lb weight on your upper back",
-     how:"Forearm plank, body straight. Carefully place one 5lb weight on your upper back. Hold without letting hips sag or rise. The weight forces your core to work much harder. If you cannot do it with weight yet, do bodyweight and build up to it."},
-    {name:"5lb Wrist Curl",sets:"3",reps:"15",badge:"weight",note:"Builds grip strength needed for pull-ups",
-     how:"Sit on chair edge, forearms resting on thighs, palms UP holding 5lb weights. Let weights roll to fingertips then curl wrists up as high as possible. Lower slowly. Builds forearms and grip — both of which directly help pull-up progress."}
-   ],
-   cooldown:"5 min elliptical + hip flexor and quad stretch"},
- 
-  // ── THURSDAY: SHOULDER + BOARD PUSH ─────────────────────────────
-  {day:"Thursday",label:"SHOULDER + PUSH",focus:"Push-Up Board Mastery + Full Shoulder Work",color:"#00C853",emoji:"⚡",
-   prog:{type:"pushup",title:"Push-Up Ladder — log your level"},
-   warmup:{name:"Jump Rope",reps:"500 jumps",note:"Alternate feet every 50 jumps"},
-   cardio:{name:"Treadmill",reps:"Burn 100 cal",note:"30 sec fast / 60 sec walk intervals"},
-   exercises:[
-    {name:"Board Wide-Grip Push-Up",sets:"3",reps:"10–15",badge:"board",note:"Widest hand setting — outer chest and shoulders",
-     how:"Board on WIDE grip handles. Hands on outermost grips. Lower chest straight down, elbows flare out to sides. Press back up. Wide grip maximises stretch on your outer chest and front shoulders. Master this before moving to narrower grips."},
-    {name:"Board Shoulder-Width Push-Up",sets:"3",reps:"8–12",badge:"board",note:"Normal grip — standard push-up on the board",
-     how:"Board on the standard SHOULDER-WIDTH grip. This is the classic push-up position but the board handles allow your hands to be at the perfect angle, reducing wrist strain. Lower chest to the board, press up. This is the main push-up grip you want to get strong at."},
-    {name:"Board Narrow-Grip Push-Up",sets:"3",reps:"6–10",badge:"board",note:"Hands close — hits triceps hardest",
-     how:"Move to NARROW grip on the board. Hands come in close. Lower chest, keeping elbows pointing back and close to body. Press up. Narrow grip is significantly harder and targets triceps and inner chest. Drop to knees if you need to."},
-    {name:"Board Push-Up Slow Tempo",sets:"2",reps:"6–8",badge:"board",note:"4 sec down — 1 sec hold — 2 sec up — any grip",
-     how:"Pick any board grip. Lower yourself for 4 full seconds. Hold at the bottom for 1 second — chest barely touching. Press up for 2 seconds. That is 1 rep. Slow tempo builds dramatically more strength than normal speed push-ups because muscles stay under tension longer. 6 slow reps beats 15 fast reps."},
-    {name:"5lb Shoulder Press",sets:"3",reps:"12",badge:"weight",note:"Press straight overhead — core tight",
-     how:"Sit or stand, one 5lb weight in each hand at shoulder height, palms forward. Press both straight up until arms fully extended. Keep core tight — no arching lower back. Lower slowly back to shoulders. Builds the shoulder cap that makes you look wider."},
-    {name:"5lb Lateral Raise",sets:"3",reps:"12",badge:"weight",note:"Raise exactly to shoulder height — no higher",
-     how:"5lb weights at sides, palms in, slight elbow bend. Raise both arms out to a T shape at shoulder height exactly. Do not shrug! Lower very slowly. Builds shoulder WIDTH — one of the most important exercises for looking athletic and bigger."},
-    {name:"5lb Front Raise",sets:"3",reps:"12",badge:"weight",note:"Arms straight, raise to eye level",
-     how:"5lb weights resting on thighs, palms down. Keep arms straight with slight elbow bend. Raise both weights forward and up to eye level exactly. Do not swing or use your back. Lower slowly. Works the front of shoulders which helps with all pushing movements."}
-   ],
-   cooldown:"5 min elliptical + shoulder and chest stretch"},
- 
-  // ── FRIDAY: BACK + ARMS ─────────────────────────────────────────
-  {day:"Friday",label:"BACK + ARMS",focus:"Pull-Up Work + 5lb Back and Arm Variety",color:"#00B0FF",emoji:"🌊",
-   prog:{type:"pullup",title:"Pull-Up Ladder — where are you today?"},
-   warmup:{name:"Jump Rope",reps:"500 jumps",note:"Focus on wrist rotation only"},
-   cardio:{name:"Treadmill",reps:"Burn 100 cal",note:"Steady jog — breathe through your nose"},
-   exercises:[
-    {name:"Negative Pull-Up",sets:"3",reps:"4–6",badge:"pull",note:"Jump to top — lower in 5 full seconds — fastest builder",
-     how:"Jump so your chin is above the bar. Lower yourself down as slowly as possible — aim for 5 full seconds. Fight gravity every inch. Do NOT drop. This is the single most effective way to build pull-up strength. Once you can do 6 controlled negatives you are ready to attempt full pull-ups from the bottom."},
-    {name:"Band-Assisted Pull-Up",sets:"3",reps:"6–8",badge:"pull",note:"Band around foot reduces your bodyweight — real pull-up movement",
-     how:"Loop resistance band over bar. Place one foot in the band — it assists you upward. Grip bar and pull yourself up until chin clears bar. Lower slowly. Use thicker band for more assistance, thinner for less. This teaches your body the exact full pull-up movement pattern with assistance so you can build toward unassisted."},
-    {name:"5lb Rear Delt Row",sets:"3",reps:"12",badge:"weight",note:"Hinge forward — pull elbows HIGH and wide",
-     how:"Hinge forward at waist, 5lb weights hanging down, palms facing each other. Pull both elbows UP and OUT to the sides — like a wide row — until level with shoulders. Squeeze rear delts and upper back hard. Lower slowly. Builds the back of your shoulders and upper back width."},
-    {name:"5lb Bent-Over Row",sets:"3",reps:"12",badge:"weight",note:"Both arms — main back thickness builder",
-     how:"Hinge forward, both 5lb weights hanging. Pull both elbows back to hips at the same time, squeezing shoulder blades hard together at top. Hold 1 second. Lower slowly. 3 sets — keeps building your back on a second day."},
-    {name:"5lb Concentration Curl",sets:"3",reps:"10 each arm",badge:"weight",note:"Elbow on inner thigh — zero cheating possible",
-     how:"Sit on chair, legs apart. Hold 5lb in right hand, brace right elbow on inside of right thigh. Curl to shoulder with arm fully isolated. Squeeze hard at top. Lower slowly. Switch arms. Zero cheating possible. Builds peak bicep shape."},
-    {name:"5lb Tricep Overhead Extension",sets:"3",reps:"12",badge:"weight",note:"Hold ONE weight with both hands overhead",
-     how:"Hold a single 5lb weight with both hands, raise above head. Keeping upper arms still and pointing up, slowly lower weight behind head by bending only at elbows. Feel deep stretch in triceps. Press back up. Hits the long head of the tricep — the part most exercises miss."},
-    {name:"5lb Hammer Curl",sets:"3",reps:"12",badge:"weight",note:"Thumbs up — forearms and biceps together",
-     how:"Thumbs pointing UP holding 5lb weights. Curl up, squeeze, lower slowly. Builds forearms and biceps simultaneously — great for overall arm thickness and grip strength for pull-ups."}
-   ],
-   cooldown:"5 min elliptical + full arm and back stretch"},
- 
-  // ── SATURDAY: FULL BODY POWER ────────────────────────────────────
-  {day:"Saturday",label:"FULL POWER",focus:"Full Body + Board Ladder + Pull-Up Test",color:"#7C4DFF",emoji:"🚀",
-   prog:{type:"pushup",title:"Push-Up Level — log your progress"},
-   warmup:{name:"Jump Rope",reps:"600 jumps",note:"Extra 100 — push your pace today!"},
-   cardio:{name:"Treadmill",reps:"Burn 120 cal",note:"Extra effort Saturday — earn it!"},
-   exercises:[
-    {name:"Board Push-Up Full Ladder",sets:"2",reps:"Max at each level",badge:"board",note:"High → Mid → Low → Floor — no rest between levels",
-     how:"Start at HIGHEST board setting, do max reps. Without resting move to MID, do max reps. Move to LOW, do max reps. Then go to the FLOOR with no board, do max reps. That full run is 1 set. Rest 2 minutes, do it again. Write your total reps every single week. Watching this number climb is the most motivating thing you can do."},
-    {name:"Pull-Up Max Test",sets:"3",reps:"Max (even 1 rep counts)",badge:"pull",note:"Absolute best effort — write down EXACTLY what you did",
-     how:"Give your absolute best pull-up attempt. If you cannot do a full one yet, do a jumping pull-up and lower as slowly as possible — still excellent work. Write down what you did: how many full pull-ups, how many negatives, how long your hang was. Next week try to beat every single number. You will get better every week."},
-    {name:"5lb Squat to Press",sets:"4",reps:"10",badge:"weight",note:"Full squat + overhead press — legs + shoulders in one move",
-     how:"Hold a 5lb weight in each hand at shoulder height. Squat all the way down. As you drive up to standing, press BOTH weights overhead simultaneously. Lower back to shoulders as you squat again. 4 sets of 10. Most efficient full-body move possible — legs, core, and shoulders all at once."},
-    {name:"5lb Romanian Deadlift",sets:"3",reps:"12",badge:"weight",note:"Slow and controlled — full hamstring stretch",
-     how:"Hold 5lb weights in front of thighs. Push hips backward while sliding weights down legs, back flat. Stop at deep hamstring stretch. Drive hips forward to stand. Builds hamstrings, glutes, and lower back — your whole posterior chain."},
-    {name:"Mountain Climbers",sets:"3",reps:"30 sec",badge:"",note:"Hips LOW — do not let them bounce",
-     how:"Plank position on hands. Drive right knee to chest then quickly switch — left knee in as right goes back. Keep alternating as fast as possible for 30 seconds. Hips stay low and stable. This is cardio and core training combined."},
-    {name:"Board Diamond Push-Up Finisher",sets:"2",reps:"Max to failure",badge:"board",note:"Go until you absolutely cannot do one more rep",
-     how:"Board flat on floor, NARROW or DIAMOND grip. Lower chest to board, elbows pointing back. Press up. Do reps until complete failure — not one more is possible. This is your finisher. Leave everything on the floor. Write your number every week and beat it by even 1 rep."},
-    {name:"Burpee",sets:"3",reps:"8",badge:"",note:"Full body conditioning — step instead of jump if needed",
-     how:"Stand tall, place hands on floor, jump or step feet back to plank, do a push-up (optional), jump or step feet forward, stand up and raise hands overhead. That is 1 rep. Burpees build full-body conditioning faster than almost anything. Modify by stepping instead of jumping whenever needed."}
-   ],
-   cooldown:"10 min easy elliptical + full body stretch — take your time today"},
- 
-  // ── SUNDAY: SLOW AND CHILL ───────────────────────────────────────
-  {day:"Sunday",label:"SLOW & CHILL",focus:"Light Movement + Full Recovery",color:"#F06292",emoji:"😌",
-   prog:null,
-   warmup:{name:"Easy Walk",reps:"5 min",note:"No intensity — just get blood flowing gently"},
-   cardio:{name:"Treadmill Walk",reps:"Burn 100 cal",note:"2.5–3 mph — slow and easy, enjoy it"},
-   exercises:[
-    {name:"Jump Rope — Chill Pace",sets:"1",reps:"500 jumps slow",badge:"",note:"No rush — put on music and enjoy it",
-     how:"Jump at the most comfortable relaxed pace you can manage. No speed goal. Miss a jump — just restart. This is about gentle circulation and keeping your jump rope habit alive. Think of it as moving meditation."},
-    {name:"Board Incline Push-Up — Easy Slow",sets:"2",reps:"10 very slow reps",badge:"board",note:"Highest setting — 3 sec down, hold, 2 sec up — perfect form",
-     how:"Board on HIGHEST setting to make it easy. Do 10 reps with perfect slow form — 3 seconds down, hold 1 second at the bottom, 2 seconds up. Rest days are perfect for slow practice push-ups. Your muscles learn push-up technique even on easy days and you build muscle memory without fatigue."},
-    {name:"Dead Hang Hold",sets:"3",reps:"20–30 sec",badge:"pull",note:"Every day you hang builds toward pull-ups",
-     how:"Jump up and hang from your bar completely loose. This is simultaneously a height stretch AND pull-up preparation. The more time you spend hanging over weeks, the faster your grip and pull-up strength improve. Try to add a few seconds each week."},
-    {name:"5lb Shoulder Circles",sets:"2",reps:"10 each direction",badge:"weight",note:"Keeps shoulder joints healthy for push and pull work",
-     how:"Hold a 5lb weight in each hand at sides. Make large slow circles forward for 10 reps then backward for 10. Smooth and controlled. This maintains shoulder joint mobility — critical for consistent push-up and pull-up progress without injury."},
-    {name:"5lb Bent-Over Reverse Fly",sets:"2",reps:"12",badge:"weight",note:"Hinge forward — raise arms out to sides like wings",
-     how:"Hinge forward at waist, 5lb weights hanging, palms facing each other. Raise both arms out to sides like wings until at shoulder height. Lower slowly. This is an active recovery move that keeps your back and rear shoulders engaged lightly without fatigue."},
-    {name:"Child's Pose Hold",sets:"3",reps:"30–45 sec",badge:"",note:"Let your back fully decompress",
-     how:"Kneel, sit hips back toward heels, stretch arms long in front on the floor. Forehead rests on floor. Breathe deeply — in through nose, out through mouth. Let your entire back relax with each breath. Decompress everything from the week."},
-    {name:"Hip Flexor Stretch",sets:"2",reps:"40 sec each side",badge:"",note:"Do this EVERY single day — posture equals height",
-     how:"Kneel right knee down, left foot forward. Push hips forward gently until you feel the stretch in the front of your right hip. Back stays tall and straight. Breathe and relax deeper each exhale. Switch sides. This is the most important daily habit for looking your tallest."}
-   ],
-   cooldown:"Legs up the wall for 5 min — best recovery position"}
+
+var PULLUP_STEPS = [
+  "Dead Hang Hold",
+  "Scapular Pull",
+  "Band-Assisted",
+  "Jumping + Slow Lower",
+  "Negative Pull-Up",
+  "Half Pull-Up",
+  "Full Pull-Up",
+  "Chin-Up",
+  "Chest-to-Bar"
 ];
- 
-const TIPS=[
-  {icon:"😴",title:"Sleep 9–10 Hours",desc:"90% of height growth and all muscle repair happens during sleep. The most important rule."},
-  {icon:"📝",title:"Log Every Rep",desc:"Write down your push-up and pull-up reps every session. Watching numbers grow week by week is the best motivation."},
-  {icon:"🥛",title:"Eat More Protein",desc:"~100g daily. Eggs, chicken, Greek yogurt, milk. Muscles literally cannot grow without protein."},
-  {icon:"💧",title:"Drink Water",desc:"At least 8 big glasses daily. Muscles are 75% water — dehydration kills your performance."},
-  {icon:"🦴",title:"Height Window",desc:"At 14 you are in a prime growth window. Daily stretching + sleep + good posture = maximum height."}
+
+var pushupLevel = parseInt(localStorage.getItem("pul") || "0");
+var pullupLevel = parseInt(localStorage.getItem("pull") || "0");
+
+// ── DAILY PUSH-UP PRACTICE per day ──────────────────────────────────
+// intensity: "heavy" "medium" "light" "rest"
+var DAILY_PUSHUPS = {
+  Monday: {
+    intensity: "heavy",
+    color: "#FF4D4D",
+    banner: "HEAVY PUSH DAY - Push your max today",
+    bannersub: "This is your main chest day - go hard on every set",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "3", reps: "12-15", badge: "board",
+        note: "Green handles - widest - easiest - outer chest",
+        how: "Hands on GREEN handles. Lower chest slowly 2 seconds down, elbows flare slightly out. Press back up. Green is the easiest and widest grip targeting your outer chest. Aim for 15 reps. Once you can do 15 for 2 sessions straight, move to Yellow next time."
+      },
+      {
+        name: "Yellow Grip Push-Up (Shoulder)", sets: "3", reps: "8-12", badge: "board",
+        note: "Yellow handles - shoulder width - chest and shoulders",
+        how: "Move to YELLOW handles - the standard shoulder-width push-up position. Lower chest to board, press up. This hits chest AND front shoulders together. Harder than green. Work toward 12 clean reps."
+      },
+      {
+        name: "Red Grip Push-Up (Lat)", sets: "2", reps: "6-10", badge: "board",
+        note: "Red handles - wide lat grip - outer chest stretch",
+        how: "Hands on RED handles - the wide lat position. Lower chest letting elbows flare wide. Press back up. Red grip gives a deep outer chest stretch. Challenging - do what you can."
+      },
+      {
+        name: "Negative Push-Up on Yellow", sets: "3", reps: "5-8", badge: "prog",
+        note: "5 seconds DOWN - fastest way to build push-up strength",
+        how: "Full push-up position on YELLOW handles. Body perfectly straight. Lower yourself for 5 full seconds counting out loud. You do NOT need to push back up - use your knees to reset each rep. Negatives build push-up strength faster than anything else. Do these even if you cannot do a full push-up yet."
+      }
+    ]
+  },
+  Tuesday: {
+    intensity: "light",
+    color: "#FF8C00",
+    banner: "LIGHT PUSH PRACTICE - Just a few easy reps",
+    bannersub: "Back day today so keep push-ups easy - just maintain the habit",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "2", reps: "5-8 easy", badge: "board",
+        note: "Green handles only - easy and slow - do not push hard",
+        how: "Hands on GREEN handles - easiest grip. Do just 5 to 8 slow easy reps. 3 seconds down, 2 seconds up. No struggling. Today is just about keeping the push-up movement fresh in your muscle memory without tiring out your chest before your back workout. Easy is the goal."
+      },
+      {
+        name: "Wall Push-Up", sets: "1", reps: "10 slow reps", badge: "prog",
+        note: "Super easy - just to keep the movement pattern active",
+        how: "Stand arm length from a wall, hands at chest height. Lean in slowly then push back. Very easy. Just 10 reps to activate the chest and keep your push-up habit going every single day. No effort needed here."
+      }
+    ]
+  },
+  Wednesday: {
+    intensity: "medium",
+    color: "#FFD700",
+    banner: "MEDIUM PUSH PRACTICE - Moderate effort",
+    bannersub: "Leg day today so do a moderate push-up set to keep progressing",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "2", reps: "10-12", badge: "board",
+        note: "Green handles - moderate effort - not max effort",
+        how: "Hands on GREEN handles. Do 10 to 12 reps at a comfortable pace. Not your max effort - save your legs for leg day. But push enough to keep your chest progressing. Focus on perfect form every rep."
+      },
+      {
+        name: "Yellow Grip Push-Up (Shoulder)", sets: "2", reps: "6-8", badge: "board",
+        note: "Yellow handles - a few solid reps - quality over quantity",
+        how: "Move to YELLOW handles. Do 6 to 8 clean reps with perfect form. Slow on the way down. These keep your shoulder-width push-up progressing even on leg day. Do not go to failure - stop when form starts to break."
+      },
+      {
+        name: "Kneeling Push-Up", sets: "1", reps: "Max reps", badge: "prog",
+        note: "Knees down - go to failure - write down your number",
+        how: "Knees on floor, hands on floor or board, body in straight line from knees to head. Lower chest all the way down then press up. Do as many as you can until failure. Write this number down every Wednesday and watch it grow over weeks. This is your mid-week benchmark."
+      }
+    ]
+  },
+  Thursday: {
+    intensity: "heavy",
+    color: "#00C853",
+    banner: "HEAVY PUSH DAY - All 4 board colors today",
+    bannersub: "Second heavy push day of the week - go hard and use all grips",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "3", reps: "10-15", badge: "board",
+        note: "Green handles - warm up here before harder grips",
+        how: "Hands on GREEN handles. Start here to warm up your chest before harder grips. 10 to 15 reps at a good pace. This gets blood into your chest and shoulders before the harder blue and yellow work."
+      },
+      {
+        name: "Yellow Grip Push-Up (Shoulder)", sets: "3", reps: "8-12", badge: "board",
+        note: "Yellow handles - standard grip - main push-up to master",
+        how: "Move to YELLOW handles. Lower chest to board slowly, press up. This is the main push-up grip you want to get strong at over time. It is the closest to a real floor push-up. Work toward 12 clean reps."
+      },
+      {
+        name: "Blue Grip Push-Up (Tricep)", sets: "3", reps: "5-8", badge: "board",
+        note: "Blue handles - narrowest and hardest - triceps burning",
+        how: "Move to BLUE handles - the narrow tricep grip. Hands come in close. Elbows point BACK and stay close to your body as you lower. Press up. This is the hardest grip. 5 reps is great. 8 reps is excellent. Drop to your knees if needed."
+      },
+      {
+        name: "Slow Tempo on Yellow", sets: "2", reps: "5-6", badge: "board",
+        note: "4 sec down - hold 1 sec - 2 sec up - strength builder",
+        how: "YELLOW handles. Lower for 4 full seconds. Hold 1 second at the bottom. Press up for 2 seconds. That is 1 rep. Slow tempo builds dramatically more strength than fast reps. 5 slow reps does more than 15 fast ones."
+      }
+    ]
+  },
+  Friday: {
+    intensity: "light",
+    color: "#00B0FF",
+    banner: "LIGHT PUSH PRACTICE - Easy maintenance",
+    bannersub: "Back and arms today so keep push-ups light and easy",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "2", reps: "5-8 easy", badge: "board",
+        note: "Green only - slow and easy - do not strain",
+        how: "Hands on GREEN handles. Just 5 to 8 very slow easy reps. 3 seconds down, hold, 2 seconds up. No straining at all. Today is a back day and push-ups are just maintenance. The goal is keeping the movement pattern active every day so your body keeps adapting even on easy days."
+      },
+      {
+        name: "Negative Push-Up", sets: "2", reps: "3-4", badge: "prog",
+        note: "Just 3 or 4 slow negatives - strength without fatigue",
+        how: "Push-up position on floor or green handles. Lower yourself for 5 full seconds - very slow and controlled. Use knees to get back up. Only 3 or 4 reps per set. This maintains your negative strength without tiring you out before the main workout. Even a few negatives every day adds up massively over time."
+      }
+    ]
+  },
+  Saturday: {
+    intensity: "heavy",
+    color: "#7C4DFF",
+    banner: "HEAVY PUSH DAY - Full board ladder today",
+    bannersub: "Full power Saturday - run the full color ladder and go to failure",
+    exercises: [
+      {
+        name: "Full Board Color Ladder", sets: "2", reps: "Max at each color", badge: "board",
+        note: "Green then Yellow then Red then Blue - no rest between colors",
+        how: "Start on GREEN handles and do max reps. Without resting move to YELLOW and do max reps. Move to RED and do max reps. Then move to BLUE and do max reps. That full run is 1 set. Rest 2 minutes then do it again. Green is easiest, Blue is hardest. Write your total reps EVERY week and try to beat it."
+      },
+      {
+        name: "Blue Grip Finisher (Tricep)", sets: "2", reps: "Max to failure", badge: "board",
+        note: "Blue handles - go until you cannot do one more rep",
+        how: "Hands on BLUE handles - narrow tricep grip. Lower chest to board, elbows pointing back. Do reps until complete failure - not one more rep possible. This is your Saturday finisher. Write your number every week and try to beat it by even 1 rep."
+      },
+      {
+        name: "Full Push-Up Attempt on Floor", sets: "3", reps: "Max reps", badge: "prog",
+        note: "No board - just the floor - go for it - write your number",
+        how: "No board. Hands on floor shoulder-width. Body in a straight line. Lower chest all the way to floor and press up. Do as many as you can. If you cannot do any yet, do negatives - lower in 5 seconds then reset on knees. Write your floor push-up number every Saturday. This is your weekly benchmark and it WILL go up."
+      }
+    ]
+  },
+  Sunday: {
+    intensity: "rest",
+    color: "#F06292",
+    banner: "EASY PUSH PRACTICE - Super light recovery",
+    bannersub: "Chill day so just a few slow reps to keep the habit alive",
+    exercises: [
+      {
+        name: "Green Grip Push-Up (Pectoral)", sets: "2", reps: "8 very slow", badge: "board",
+        note: "Green handles - 3 sec down - hold - 2 sec up - perfect form",
+        how: "Hands on GREEN handles. Do 8 reps very slowly. 3 seconds down, hold 1 second at the bottom feeling your chest, 2 seconds up. No rushing at all. Rest days with slow easy push-ups build muscle memory. Your body gets better at the movement even on easy days."
+      },
+      {
+        name: "Wall Push-Up", sets: "1", reps: "10 reps", badge: "prog",
+        note: "Just 10 easy wall push-ups - keeping the habit alive",
+        how: "Stand arm length from a wall. Hands at chest height. Lean in and push back. 10 easy reps. This is the easiest push-up variation and on Sunday it is just about staying consistent every single day. Consistency over 3 months beats intensity for 1 month every time."
+      }
+    ]
+  }
+};
+
+var STRETCHES = [
+  {
+    name: "Dead Hang", sets: "3", reps: "20-30 sec", badge: "pull",
+    note: "Best spine decompressor AND pull-up builder",
+    how: "Jump up and hang from a bar with both hands completely loose. Let your whole body relax and stretch downward. Do not pull up at all - just hang and let gravity work. This decompresses every disc in your spine. Build toward 30 seconds each set."
+  },
+  {
+    name: "Cobra Stretch", sets: "3", reps: "30 sec hold", badge: "",
+    note: "Opens and lengthens your spine",
+    how: "Lie face down, hands flat under shoulders. Press your upper body up while keeping hips and legs on the floor. Look up, let your back arch naturally. Hold and breathe slowly. Feel the stretch along your entire spine."
+  },
+  {
+    name: "Standing Forward Fold", sets: "3", reps: "30 sec", badge: "",
+    note: "Decompresses your lower spine",
+    how: "Stand feet hip-width. Fold forward at the waist letting your head and arms hang heavy. Bend knees slightly if needed. Each exhale sink a little deeper. Stretches your whole back chain and lower spine."
+  },
+  {
+    name: "Hip Flexor Lunge Stretch", sets: "2", reps: "40 sec each side", badge: "",
+    note: "Tight hips make you look shorter - fix this daily",
+    how: "Kneel right knee down, left foot forward. Push hips gently forward until you feel a deep stretch in the front of your right hip. Keep back tall. Breathe and relax deeper each exhale. Switch sides. Tight hip flexors cause hunching and make you look shorter - this corrects it over time."
+  },
+  {
+    name: "Cat-Cow Flow", sets: "2", reps: "10 slow reps", badge: "",
+    note: "Wakes up every vertebra in your spine",
+    how: "On hands and knees. Cat: arch back toward ceiling, chin to chest. Cow: drop belly toward floor, lift head and tailbone. Flow slowly 3 seconds each direction. Feel every part of your spine moving."
+  },
+  {
+    name: "Wall Posture Press", sets: "3", reps: "60 sec hold", badge: "",
+    note: "Bad posture costs you 1-2 inches - this fixes it",
+    how: "Stand with heels, butt, upper back AND head all touching the wall at the same time. Try to press your lower back into the wall too. Hold 60 seconds. This retrains your posture muscles to keep you at your true full height."
+  },
+  {
+    name: "Lying Spinal Twist", sets: "2", reps: "30 sec each side", badge: "",
+    note: "Do this every night before bed",
+    how: "Lie on your back, knees bent. Drop both knees slowly to the right while keeping shoulders flat on floor. Left arm out, look left. Feel the twist through your whole spine. Hold and breathe. Bring knees up then drop left. Releases all the compression from the day."
+  }
 ];
- 
-let activeDay=0,expandedEx=null,expandedStr=null;
-function hex(c,a){const r=parseInt(c.slice(1,3),16),g=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);return`rgba(${r},${g},${b},${a})`}
-function bdg(t){if(!t)return'';const m={board:'<span class="badge b-board">📋 Board</span>',weight:'<span class="badge b-weight">🏋️ 5lb</span>',prog:'<span class="badge b-prog">📈 Prog</span>',pull:'<span class="badge b-pull">🔝 Pull-Up</span>'};return m[t]||''}
-function exHTML(list,exp,prefix,color){return list.map((ex,i)=>`<div id="${prefix}-${i}"><div class="ex-row${exp===i?' open':''}" onclick="${prefix}T(${i})" style="${exp===i?`background:${hex(color,.05)};border-color:${hex(color,.24)};`:''}"><div class="ex-top"><div class="ex-num" style="background:${hex(color,.13)};border:1px solid ${hex(color,.3)};color:${color}">${i+1}</div><div class="ex-info"><div class="ex-name">${ex.name} ${bdg(ex.badge)}</div><div class="ex-note">${ex.note}</div></div><div class="ex-right"><div class="ex-sets" style="color:${color}">${ex.sets} × ${ex.reps}</div><div class="ex-arr${exp===i?' open':''}" style="${exp===i?`color:${color}`:''}">▼</div></div></div></div>${exp===i?`<div class="ex-how" style="border:1px solid ${hex(color,.22)};border-top:none"><div class="how-lbl" style="color:${color}">📋 How To Do It</div><div class="how-txt">${ex.how}</div></div>`:''}</div>`).join('')}
-function renderProg(p,c){if(!p)return'';const steps=p.type==='pushup'?PUSHUP_STEPS:PULLUP_STEPS;const lv=p.type==='pushup'?pushupLevel:pullupLevel;const fn=p.type==='pushup'?'setP':'setPull';const pills=steps.map((s,i)=>{let cl='prog-pill';if(i<lv)cl+=' done';if(i===lv)cl+=' active';const st=i===lv?`background:${c};border-color:${c};`:'';return`<span class="${cl}" style="${st}" onclick="${fn}(${i})">${i===lv?'★ ':i<lv?'✓ ':''}${s}</span>`}).join('');return`<div class="prog-box" style="background:${hex(c,.06)};border:1px solid ${hex(c,.2)}"><div class="prog-title" style="color:${c}">${p.title}</div><div class="prog-row">${pills}</div></div>`}
-function setP(i){pushupLevel=i;localStorage.setItem('pul',i);renderDay()}
-function setPull(i){pullupLevel=i;localStorage.setItem('pull',i);renderDay()}
-function renderTabs(){document.getElementById('day-tabs').innerHTML=DAYS.map((d,i)=>`<button class="dtab${i===activeDay?' active':''}" onclick="selDay(${i})" style="${i===activeDay?`background:${d.color};color:#000;border-color:${d.color};`:''}"><span class="dtab-emoji">${d.emoji}</span>${d.day.slice(0,3)}</button>`).join('')}
-function renderDay(){const d=DAYS[activeDay],c=d.color;document.getElementById('header').style.cssText=`border-bottom:3px solid ${c};background:${hex(c,.07)}`;document.getElementById('hdr-tag').style.color=c;document.getElementById('hdr-accent').style.color=c;const card=document.getElementById('day-card');card.style.background=`linear-gradient(135deg,${hex(c,.09)} 0%,#13131a 100%)`;card.style.border=`1px solid ${hex(c,.27)}`;document.getElementById('dc-day').textContent=d.day;document.getElementById('dc-day').style.color=c;document.getElementById('dc-title').textContent=d.label;document.getElementById('dc-focus').textContent=d.focus;document.getElementById('dc-emoji').textContent=d.emoji;document.getElementById('wu-name').textContent=d.warmup.name;document.getElementById('wu-reps').textContent=d.warmup.reps;document.getElementById('wu-note').textContent=d.warmup.note;document.getElementById('ca-name').textContent=d.cardio.name;document.getElementById('ca-reps').textContent=d.cardio.reps;document.getElementById('ca-note').textContent=d.cardio.note;document.getElementById('prog-container').innerHTML=renderProg(d.prog,c);document.getElementById('ex-list').innerHTML=exHTML(d.exercises,expandedEx,'ex',c);document.getElementById('str-list').innerHTML=exHTML(STRETCHES,expandedStr,'str','#64dc96');document.getElementById('cd-txt').textContent=d.cooldown;document.getElementById('tips-grid').innerHTML=TIPS.map((t,i)=>`<div class="tip-card${i===4?' tip-wide':''}"><div class="tip-icon">${t.icon}</div><div class="tip-title">${t.title}</div><div class="tip-desc">${t.desc}</div></div>`).join('')}
-function selDay(i){activeDay=i;expandedEx=null;expandedStr=null;renderTabs();renderDay();document.getElementById('day-card').classList.remove('fade-up');void document.getElementById('day-card').offsetWidth;document.getElementById('day-card').classList.add('fade-up');window.scrollTo({top:0,behavior:'smooth'})}
-function exT(i){expandedEx=expandedEx===i?null:i;renderDay();setTimeout(()=>{const el=document.getElementById(`ex-${i}`);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
-function strT(i){expandedStr=expandedStr===i?null:i;renderDay();setTimeout(()=>{const el=document.getElementById(`str-${i}`);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'})},50)}
-renderTabs();renderDay();
+
+var DAYS = [
+  {
+    day: "Monday", label: "CHEST DAY", emoji: "💪",
+    focus: "Full Chest - All Board Colors + 5lb + Push-Up Progression",
+    color: "#FF4D4D",
+    prog: { type: "pushup", title: "Push-Up Ladder - tap your current level" },
+    warmup: { name: "Jump Rope", reps: "500 jumps", note: "Easy pace - warm up wrists and chest" },
+    cardio: { name: "Treadmill", reps: "Burn 100 cal", note: "Light jog or brisk walk 3.5-4.5 mph" },
+    exercises: [
+      {
+        name: "5lb Chest Fly", sets: "3", reps: "12", badge: "weight",
+        note: "Lie on floor - wide arc - feel the chest stretch",
+        how: "Lie on your back, one 5lb weight in each hand, arms straight above chest. Slowly lower both arms wide to your sides like wings until elbows nearly touch the floor. Bring back together at the top. Go very slow on the way down. Builds inner and outer chest which makes all board push-ups easier."
+      },
+      {
+        name: "5lb Chest Press", sets: "3", reps: "12", badge: "weight",
+        note: "Floor press - drive weights straight up",
+        how: "Lie on your back, one 5lb weight in each hand at chest height, elbows bent to 90 degrees and flared out. Press both weights straight up until arms fully extended. Lower slowly back down. This is like a push-up lying down and directly trains your chest pressing muscles."
+      },
+      {
+        name: "5lb Shoulder Press", sets: "3", reps: "12", badge: "weight",
+        note: "Press straight overhead - core tight",
+        how: "Sit or stand, one 5lb weight in each hand at shoulder height, palms forward. Press both straight up until arms fully extended. Keep core tight - no arching lower back. Lower slowly. Builds the shoulder cap that makes you look wider."
+      },
+      {
+        name: "5lb Lateral Raise", sets: "3", reps: "12", badge: "weight",
+        note: "Raise exactly to shoulder height - not higher",
+        how: "5lb weights at sides, palms in, slight elbow bend. Raise both arms out to T shape at exactly shoulder height. Do not shrug. Lower very slowly. Builds shoulder WIDTH - one of the best exercises for looking bigger."
+      },
+      {
+        name: "5lb Front Raise", sets: "3", reps: "12", badge: "weight",
+        note: "Arms straight - raise to eye level only",
+        how: "5lb weights on thighs, palms down. Arms straight with slight elbow bend. Raise both weights forward and up to exactly eye level. Do not swing. Lower slowly. Works front shoulders which helps with all push-up pressing."
+      },
+      {
+        name: "5lb Tricep Kickback", sets: "3", reps: "12", badge: "weight",
+        note: "Hinge forward - extend arm fully back",
+        how: "Hold one 5lb weight, hinge forward at waist so torso is nearly parallel to floor. Tuck elbow to side at 90 degrees then slowly straighten arm backward until fully extended. Squeeze 1 second at top then bring back slowly. Do both arms."
+      }
+    ],
+    cooldown: "5 min light elliptical + chest doorway stretch 30 sec"
+  },
+  {
+    day: "Tuesday", label: "BACK + PULL-UPS", emoji: "🔥",
+    focus: "Pull-Up Ladder + Full Back + 5lb Biceps",
+    color: "#FF8C00",
+    prog: { type: "pullup", title: "Pull-Up Ladder - tap your current level" },
+    warmup: { name: "Jump Rope", reps: "500 jumps", note: "Try double-unders if ready" },
+    cardio: { name: "Treadmill", reps: "Burn 100 cal", note: "Incline walk 5-8 percent grade" },
+    exercises: [
+      {
+        name: "Dead Hang Hold", sets: "3", reps: "20-30 sec", badge: "pull",
+        note: "Step 1 of pull-up progression - grip and hang",
+        how: "Jump up to bar and hang with both hands. Keep shoulders slightly squeezed down - do not hang fully limp. Hold as long as you can. Builds grip strength and gets your body used to supporting its own weight. This is also your best spine stretch. Start here every pull-up session."
+      },
+      {
+        name: "Scapular Pull", sets: "3", reps: "8-10", badge: "pull",
+        note: "Step 2 - teaches your back to start the pull",
+        how: "Hang from bar. Without bending elbows at all, squeeze shoulder blades DOWN and TOGETHER - body rises maybe an inch. Let them slide back up. This tiny movement is a scapular pull and teaches your back how to initiate a pull-up. Do 8 to 10 per set."
+      },
+      {
+        name: "Jumping Pull-Up + Slow Lower", sets: "3", reps: "5-6", badge: "pull",
+        note: "Step 3 - jump to top, lower in 5 full seconds",
+        how: "Jump up so your chin is above the bar. Lower yourself down as slowly as possible - aim for 5 full seconds. Fight gravity the entire way. Do not drop. These negatives are the fastest way to build pull-up strength. When you can do 6 solid slow negatives you are very close to your first real pull-up."
+      },
+      {
+        name: "5lb Bent-Over Row", sets: "4", reps: "12", badge: "weight",
+        note: "Both arms - squeeze shoulder blades together at top",
+        how: "Hold a 5lb weight in each hand, hinge forward until torso is nearly parallel to floor. Pull BOTH elbows back toward hips at the same time, squeezing shoulder blades hard together at the top. Hold 1 second. Lower slowly. 4 sets - directly builds the muscles used in pull-ups."
+      },
+      {
+        name: "5lb Single-Arm Row", sets: "3", reps: "10 each side", badge: "weight",
+        note: "Elbow drives past your back - squeeze hard at top",
+        how: "Brace one hand on a chair, hold one 5lb weight and let it hang. Pull elbow up and back past your hip - think elbow to the ceiling. Squeeze shoulder blade hard at top for 1 second. Lower slowly. 10 each side."
+      },
+      {
+        name: "5lb Bicep Curl", sets: "3", reps: "12", badge: "weight",
+        note: "3 seconds DOWN - the slow lowering builds muscle",
+        how: "Stand with a 5lb weight in each hand, palms forward, elbows pinned to sides. Curl both up to shoulders, squeeze hard, then lower VERY slowly - count 3 full seconds down. Never let elbows swing forward."
+      },
+      {
+        name: "5lb Hammer Curl", sets: "3", reps: "12", badge: "weight",
+        note: "Thumbs up - thick forearms and biceps together",
+        how: "Same as curl but thumbs pointing UP like hammers. Curl up, squeeze, lower slowly. Hits a different part of the bicep and builds forearms. Stronger forearms help with pull-up grip."
+      }
+    ],
+    cooldown: "5 min elliptical + bicep and lat stretch"
+  },
+  {
+    day: "Wednesday", label: "LEG DAY", emoji: "🦵",
+    focus: "Full Legs + Core - 5lb Everything",
+    color: "#FFD700",
+    prog: null,
+    warmup: { name: "Jump Rope", reps: "500 jumps", note: "High knees every 3rd set of 50" },
+    cardio: { name: "Treadmill", reps: "Burn 100 cal", note: "Jog at a comfortable pace" },
+    exercises: [
+      {
+        name: "Bodyweight Squat", sets: "2", reps: "15", badge: "",
+        note: "Warm-up sets - perfect form before adding weight",
+        how: "Feet shoulder-width, toes slightly out. Arms forward for balance. Sit back AND down - thighs parallel to floor or lower. Drive through heels to stand. Never let knees cave inward. These are just warm-up sets."
+      },
+      {
+        name: "5lb Goblet Squat", sets: "4", reps: "12", badge: "weight",
+        note: "Hold both 5lbs at chest - go as deep as possible",
+        how: "Press both 5lb weights together at your chest. Feet shoulder-width, toes slightly out. Squat as deep as you can - let elbows pass between knees at the bottom. Chest stays tall. Drive through heels to stand. 4 sets - main leg builder today."
+      },
+      {
+        name: "5lb Reverse Lunge", sets: "3", reps: "10 each leg", badge: "weight",
+        note: "One 5lb each hand - front knee stays over ankle",
+        how: "Hold a 5lb weight in each hand at sides. Step one foot BACKWARD and lower back knee toward floor gently. Front knee stays above ankle. Push through front heel to return. Alternate legs. Torso stays upright."
+      },
+      {
+        name: "5lb Romanian Deadlift", sets: "3", reps: "12", badge: "weight",
+        note: "Push hips BACK - feel the hamstring stretch",
+        how: "Hold a 5lb weight in each hand in front of thighs. Push hips BACKWARD while sliding weights down your legs - back stays flat. Stop when you feel a deep stretch in the backs of your thighs. Drive hips forward to stand."
+      },
+      {
+        name: "5lb Calf Raise", sets: "4", reps: "20", badge: "weight",
+        note: "Rise AS HIGH as possible - full range every rep",
+        how: "Hold a 5lb weight in each hand. Rise up onto tippy toes as HIGH as possible, hold 1 second at the very top, then lower all the way back down slowly. If you have a step, hang heels off the edge for extra range."
+      },
+      {
+        name: "Plank with 5lb on Back", sets: "3", reps: "30-45 sec", badge: "weight",
+        note: "Place one 5lb weight on your upper back",
+        how: "Forearm plank, body in a straight line. Carefully place one 5lb weight on your upper back. Hold without letting hips sag or rise. The weight forces your core to work much harder than a regular plank."
+      },
+      {
+        name: "5lb Wrist Curl", sets: "3", reps: "15", badge: "weight",
+        note: "Builds grip strength needed for pull-ups",
+        how: "Sit on chair edge, forearms resting on thighs, palms UP holding 5lb weights. Let weights roll to fingertips then curl wrists up as high as possible. Lower slowly. Builds forearms and grip which directly help pull-up progress."
+      }
+    ],
+    cooldown: "5 min elliptical + hip flexor and quad stretch"
+  },
+  {
+    day: "Thursday", label: "SHOULDER + PUSH", emoji: "⚡",
+    focus: "All 4 Board Colors + Full Shoulder Work",
+    color: "#00C853",
+    prog: { type: "pushup", title: "Push-Up Ladder - log your level today" },
+    warmup: { name: "Jump Rope", reps: "500 jumps", note: "Alternate feet every 50 jumps" },
+    cardio: { name: "Treadmill", reps: "Burn 100 cal", note: "30 sec fast then 60 sec walk - repeat" },
+    exercises: [
+      {
+        name: "5lb Shoulder Press", sets: "3", reps: "12", badge: "weight",
+        note: "Press straight overhead - core tight",
+        how: "Sit or stand, one 5lb weight in each hand at shoulder height, palms forward. Press both straight up until arms fully extended. Keep core tight - no arching lower back. Lower slowly. Builds the shoulder cap."
+      },
+      {
+        name: "5lb Lateral Raise", sets: "3", reps: "12", badge: "weight",
+        note: "Raise exactly to shoulder height - not higher",
+        how: "5lb weights at sides, palms in, slight elbow bend. Raise both arms out to a T shape at exactly shoulder height. Do not shrug. Lower very slowly. Builds shoulder WIDTH."
+      },
+      {
+        name: "5lb Front Raise", sets: "3", reps: "12", badge: "weight",
+        note: "Arms straight - raise to eye level",
+        how: "5lb weights on thighs, palms down. Arms straight with slight elbow bend. Raise both weights forward and up to eye level. Do not swing. Lower slowly."
+      },
+      {
+        name: "5lb Bent-Over Rear Delt Row", sets: "3", reps: "12", badge: "weight",
+        note: "Hinge forward - pull elbows HIGH and wide",
+        how: "Hinge forward at waist, 5lb weights hanging, palms facing each other. Pull both elbows UP and OUT to the sides until level with shoulders. Squeeze rear delts hard. Lower slowly. Builds back of shoulders."
+      },
+      {
+        name: "5lb Tricep Overhead Extension", sets: "3", reps: "12", badge: "weight",
+        note: "Hold ONE weight with both hands overhead",
+        how: "Hold a single 5lb weight with both hands above your head. Keeping upper arms still and pointing up, slowly lower weight behind your head bending only at elbows. Feel deep tricep stretch. Press back up."
+      },
+      {
+        name: "5lb Arnold Press", sets: "3", reps: "10", badge: "weight",
+        note: "Start palms facing you - rotate to face out as you press",
+        how: "Hold 5lb weights at shoulder height with palms facing YOUR FACE. As you press up overhead, rotate your wrists so palms face FORWARD at the top. Lower back rotating palms to face you again. This hits all three parts of your shoulder in one move."
+      }
+    ],
+    cooldown: "5 min elliptical + shoulder and chest stretch"
+  },
+  {
+    day: "Friday", label: "BACK + ARMS", emoji: "🌊",
+    focus: "Pull-Up Work + 5lb Back and Arm Variety",
+    color: "#00B0FF",
+    prog: { type: "pullup", title: "Pull-Up Ladder - where are you today?" },
+    warmup: { name: "Jump Rope", reps: "500 jumps", note: "Focus on wrist rotation only - relax your arms" },
+    cardio: { name: "Treadmill", reps: "Burn 100 cal", note: "Steady jog - breathe through your nose" },
+    exercises: [
+      {
+        name: "Negative Pull-Up", sets: "3", reps: "4-6", badge: "pull",
+        note: "Jump to top - lower in 5 full seconds - fastest builder",
+        how: "Jump so your chin is above the bar. Lower yourself down as slowly as possible - aim for 5 full seconds. Fight gravity every single inch. Do NOT just drop. This is the most effective way to build pull-up strength."
+      },
+      {
+        name: "Band-Assisted Pull-Up", sets: "3", reps: "6-8", badge: "pull",
+        note: "Band under foot reduces your weight - real pull-up movement",
+        how: "Loop resistance band over bar. Place one foot in the band - it assists you upward. Grip bar and pull yourself up until chin clears bar. Lower slowly. Use thicker band for more help, thinner for less."
+      },
+      {
+        name: "5lb Bent-Over Row", sets: "3", reps: "12", badge: "weight",
+        note: "Both arms - main back thickness builder",
+        how: "Hinge forward, both 5lb weights hanging. Pull both elbows back to hips at the same time, squeezing shoulder blades hard together at top. Hold 1 second. Lower slowly."
+      },
+      {
+        name: "5lb Concentration Curl", sets: "3", reps: "10 each arm", badge: "weight",
+        note: "Elbow on inner thigh - zero cheating possible",
+        how: "Sit on chair edge, legs apart. Hold 5lb in right hand, brace right elbow on inside of right thigh. Curl to shoulder fully isolated. Squeeze hard at top. Lower slowly. Switch arms. Builds peak bicep shape."
+      },
+      {
+        name: "5lb Tricep Overhead Extension", sets: "3", reps: "12", badge: "weight",
+        note: "Hold ONE weight with both hands overhead",
+        how: "Hold a single 5lb weight with both hands above head. Keeping upper arms still, slowly lower weight behind head bending only at elbows. Feel deep tricep stretch. Press back up."
+      },
+      {
+        name: "5lb Hammer Curl", sets: "3", reps: "12", badge: "weight",
+        note: "Thumbs up - forearms and biceps together",
+        how: "Thumbs pointing UP holding 5lb weights. Curl up, squeeze at top, lower slowly. Builds forearms and biceps together - great for arm thickness and pull-up grip."
+      },
+      {
+        name: "5lb Wrist Curl", sets: "3", reps: "15", badge: "weight",
+        note: "Builds grip strength - palms up on your thighs",
+        how: "Sit on chair, forearms on thighs, palms UP with 5lb weights. Let weights roll to fingertips then curl wrists up as high as possible. Lower slowly. Builds forearms and grip for pull-ups."
+      }
+    ],
+    cooldown: "5 min elliptical + full arm and back stretch"
+  },
+  {
+    day: "Saturday", label: "FULL POWER", emoji: "🚀",
+    focus: "Full Body + Board Color Ladder + Pull-Up Test",
+    color: "#7C4DFF",
+    prog: { type: "pushup", title: "Push-Up Level - log your progress" },
+    warmup: { name: "Jump Rope", reps: "600 jumps", note: "Extra 100 today - push your pace!" },
+    cardio: { name: "Treadmill", reps: "Burn 120 cal", note: "Extra effort Saturday - earn it!" },
+    exercises: [
+      {
+        name: "Pull-Up Max Test", sets: "3", reps: "Max - even 1 rep counts", badge: "pull",
+        note: "Absolute best effort - write down exactly what you did",
+        how: "Give your absolute best pull-up attempt. If you cannot do a full one yet, do a jumping pull-up and lower as slowly as possible. Write down exactly what you did - how many full pull-ups, how many negatives, how long your hang was. Next week try to beat every number."
+      },
+      {
+        name: "5lb Squat to Press", sets: "4", reps: "10", badge: "weight",
+        note: "Full squat down then press overhead as you stand up",
+        how: "Hold a 5lb weight in each hand at shoulder height. Squat all the way down. As you drive up to standing, press BOTH weights overhead at the same time. Lower back to shoulders as you squat again. 4 sets of 10. Most efficient full-body move possible."
+      },
+      {
+        name: "5lb Romanian Deadlift", sets: "3", reps: "12", badge: "weight",
+        note: "Slow and controlled - full hamstring stretch",
+        how: "Hold 5lb weights in front of thighs. Push hips backward while sliding weights down legs, back flat. Stop at deep hamstring stretch. Drive hips forward to stand."
+      },
+      {
+        name: "Mountain Climbers", sets: "3", reps: "30 sec", badge: "",
+        note: "Hips LOW - do not let them bounce",
+        how: "Plank position on hands. Drive right knee to chest then quickly switch - left knee in as right goes back. Keep alternating as fast as possible for 30 seconds. Hips stay low and stable."
+      },
+      {
+        name: "Burpee", sets: "3", reps: "8", badge: "",
+        note: "Full body conditioning - step instead of jump if needed",
+        how: "Stand tall, place hands on floor, jump or step feet back to plank, do a push-up if you can, jump or step feet forward, stand up and raise hands overhead. That is 1 rep. Modify by stepping instead of jumping."
+      },
+      {
+        name: "5lb Bent-Over Row", sets: "3", reps: "12", badge: "weight",
+        note: "Both arms - squeeze shoulder blades hard at top",
+        how: "Hinge forward, both 5lb weights hanging. Pull both elbows back to hips squeezing shoulder blades together hard at top. Hold 1 second. Lower slowly."
+      }
+    ],
+    cooldown: "10 min easy elliptical + full body stretch - take your time"
+  },
+  {
+    day: "Sunday", label: "SLOW AND CHILL", emoji: "😌",
+    focus: "Light Movement + Full Recovery",
+    color: "#F06292",
+    prog: null,
+    warmup: { name: "Easy Walk", reps: "5 min", note: "No intensity - just get blood flowing gently" },
+    cardio: { name: "Treadmill Walk", reps: "Burn 100 cal", note: "2.5-3 mph - slow and easy, enjoy it" },
+    exercises: [
+      {
+        name: "Jump Rope - Easy Pace", sets: "1", reps: "500 jumps slow", badge: "",
+        note: "No rush - put on music and just enjoy it",
+        how: "Jump at the most comfortable relaxed pace you can. No speed goal. Miss a jump and just restart. This is about gentle circulation and keeping your habit alive."
+      },
+      {
+        name: "Dead Hang Hold", sets: "3", reps: "20-30 sec", badge: "pull",
+        note: "Every day you hang builds toward pull-ups AND height",
+        how: "Jump up and hang from your bar completely loose. This is simultaneously a height stretch AND pull-up preparation. The more time you spend hanging over weeks the faster your grip and pull-up strength improve."
+      },
+      {
+        name: "5lb Shoulder Circles", sets: "2", reps: "10 each direction", badge: "weight",
+        note: "Keeps shoulder joints healthy for push and pull",
+        how: "Hold a 5lb weight in each hand at sides. Make large slow circles forward for 10 reps then backward for 10. Smooth and controlled. Maintains shoulder joint mobility."
+      },
+      {
+        name: "5lb Bent-Over Reverse Fly", sets: "2", reps: "12", badge: "weight",
+        note: "Hinge forward - raise arms out like wings",
+        how: "Hinge forward at waist, 5lb weights hanging, palms facing each other. Raise both arms out to sides like wings until at shoulder height. Lower slowly. Light active recovery for your back and rear shoulders."
+      },
+      {
+        name: "Child's Pose Hold", sets: "3", reps: "30-45 sec", badge: "",
+        note: "Let your back fully decompress and relax",
+        how: "Kneel, sit hips back toward heels, stretch arms long in front on the floor. Forehead rests on floor. Breathe deeply in through nose and out through mouth. Let your entire back relax with each breath."
+      },
+      {
+        name: "Hip Flexor Stretch", sets: "2", reps: "40 sec each side", badge: "",
+        note: "Do this every single day - posture equals height",
+        how: "Kneel right knee down, left foot forward. Push hips forward gently until you feel the stretch in the front of your right hip. Back stays tall. Breathe and relax deeper each exhale. Switch sides."
+      }
+    ],
+    cooldown: "Legs up the wall for 5 min - best recovery position"
+  }
+];
+
+var TIPS = [
+  { icon: "😴", title: "Sleep 9-10 Hours", desc: "90% of height growth and all muscle repair happens during sleep. The most important rule." },
+  { icon: "📝", title: "Log Every Rep", desc: "Write down push-up and pull-up numbers every session. Watching them grow week by week is the best motivation." },
+  { icon: "🥛", title: "Eat More Protein", desc: "100g daily. Eggs, chicken, Greek yogurt, milk. Muscles cannot grow without protein." },
+  { icon: "💧", title: "Drink Water", desc: "At least 8 big glasses daily. Muscles are 75% water - dehydration kills performance." },
+  { icon: "🦴", title: "Height Window", desc: "At 14 you are in a prime growth window. Daily stretching plus sleep plus good posture equals maximum height." }
+];
+
+var activeDay = 0;
+var expandedEx = null;
+var expandedStr = null;
+var expandedPush = null;
+
+function hexA(c, a) {
+  var r = parseInt(c.slice(1, 3), 16);
+  var g = parseInt(c.slice(3, 5), 16);
+  var b = parseInt(c.slice(5, 7), 16);
+  return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+}
+
+function getBadge(t) {
+  if (!t) return "";
+  if (t === "board") return '<span class="badge b-board">Board</span>';
+  if (t === "weight") return '<span class="badge b-weight">5lb</span>';
+  if (t === "prog") return '<span class="badge b-prog">Progression</span>';
+  if (t === "pull") return '<span class="badge b-pull">Pull-Up</span>';
+  return "";
+}
+
+function buildList(list, exp, prefix, color) {
+  var html = "";
+  for (var i = 0; i < list.length; i++) {
+    var ex = list[i];
+    var isOpen = exp === i;
+    var rowStyle = isOpen ? "background:" + hexA(color, 0.05) + ";border-color:" + hexA(color, 0.24) + ";" : "";
+    html += '<div id="' + prefix + i + '">';
+    html += '<div class="ex-row' + (isOpen ? " open" : "") + '" onclick="tog(\'' + prefix + "'," + i + ')" style="' + rowStyle + '">';
+    html += '<div class="ex-top">';
+    html += '<div class="ex-num" style="background:' + hexA(color, 0.13) + ';border:1px solid ' + hexA(color, 0.3) + ';color:' + color + '">' + (i + 1) + '</div>';
+    html += '<div class="ex-info">';
+    html += '<div class="ex-name">' + ex.name + " " + getBadge(ex.badge) + '</div>';
+    html += '<div class="ex-note">' + ex.note + '</div>';
+    html += '</div>';
+    html += '<div class="ex-right">';
+    html += '<div class="ex-sets" style="color:' + color + '">' + ex.sets + " x " + ex.reps + '</div>';
+    html += '<div class="ex-arr' + (isOpen ? " open" : "") + '" style="' + (isOpen ? "color:" + color : "") + '">&#9660;</div>';
+    html += '</div></div></div>';
+    if (isOpen) {
+      html += '<div class="ex-how" style="border:1px solid ' + hexA(color, 0.22) + ';border-top:none">';
+      html += '<div class="how-lbl" style="color:' + color + '">How To Do It</div>';
+      html += '<div class="how-txt">' + ex.how + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  return html;
+}
+
+function buildProgHTML(p, c) {
+  if (!p) return "";
+  var steps = p.type === "pushup" ? PUSHUP_STEPS : PULLUP_STEPS;
+  var lv = p.type === "pushup" ? pushupLevel : pullupLevel;
+  var fn = p.type === "pushup" ? "setPU" : "setPull";
+  var pills = "";
+  for (var i = 0; i < steps.length; i++) {
+    var cl = "prog-pill";
+    if (i < lv) cl += " done";
+    if (i === lv) cl += " active";
+    var st = i === lv ? "background:" + c + ";border-color:" + c + ";" : "";
+    var pre = i === lv ? "★ " : (i < lv ? "✓ " : "");
+    pills += '<span class="' + cl + '" style="' + st + '" onclick="' + fn + '(' + i + ')">' + pre + steps[i] + '</span>';
+  }
+  return '<div class="prog-box" style="background:' + hexA(c, 0.06) + ';border:1px solid ' + hexA(c, 0.2) + '">'
+    + '<div class="prog-title" style="color:' + c + '">' + p.title + '</div>'
+    + '<div class="prog-row">' + pills + '</div>'
+    + '</div>';
+}
+
+function setPU(i) { pushupLevel = i; localStorage.setItem("pul", i); renderDay(); }
+function setPull(i) { pullupLevel = i; localStorage.setItem("pull", i); renderDay(); }
+
+function buildPushBanner(dayName, c) {
+  var pd = DAILY_PUSHUPS[dayName];
+  if (!pd) return "";
+  var bgs = {
+    heavy: "linear-gradient(135deg," + hexA(c, 0.12) + " 0%,#0e0e18 100%)",
+    medium: "linear-gradient(135deg," + hexA(c, 0.08) + " 0%,#0e0e18 100%)",
+    light: "linear-gradient(135deg,rgba(80,80,80,0.08) 0%,#0e0e18 100%)",
+    rest: "linear-gradient(135deg,rgba(80,80,80,0.06) 0%,#0e0e18 100%)"
+  };
+  var borderColors = { heavy: hexA(c, 0.35), medium: hexA(c, 0.2), light: "rgba(80,80,80,0.2)", rest: "rgba(80,80,80,0.15)" };
+  var icons = { heavy: "💥", medium: "⚡", light: "🔹", rest: "😌" };
+  return '<div class="pushday-banner" style="background:' + bgs[pd.intensity] + ';border:1px solid ' + borderColors[pd.intensity] + '">'
+    + '<div class="pushday-icon">' + icons[pd.intensity] + '</div>'
+    + '<div>'
+    + '<div class="pushday-title" style="color:' + (pd.intensity === "heavy" ? c : pd.intensity === "medium" ? c : "#888") + '">' + pd.banner + '</div>'
+    + '<div class="pushday-sub">' + pd.bannersub + '</div>'
+    + '</div></div>';
+}
+
+function renderTabs() {
+  var html = "";
+  for (var i = 0; i < DAYS.length; i++) {
+    var d = DAYS[i];
+    var isActive = i === activeDay;
+    var st = isActive ? "background:" + d.color + ";color:#000;border-color:" + d.color + ";" : "";
+    html += '<button class="dtab' + (isActive ? " active" : "") + '" onclick="selDay(' + i + ')" style="' + st + '">';
+    html += '<span class="dtab-emoji">' + d.emoji + '</span>';
+    html += d.day.slice(0, 3);
+    html += '</button>';
+  }
+  document.getElementById("day-tabs").innerHTML = html;
+}
+
+function renderDay() {
+  var d = DAYS[activeDay];
+  var c = d.color;
+  var dayName = d.day;
+
+  document.getElementById("header").style.cssText = "border-bottom:3px solid " + c + ";background:" + hexA(c, 0.07);
+  document.getElementById("hdr-tag").style.color = c;
+  document.getElementById("hdr-accent").style.color = c;
+
+  var card = document.getElementById("day-card");
+  card.style.background = "linear-gradient(135deg," + hexA(c, 0.09) + " 0%,#13131a 100%)";
+  card.style.border = "1px solid " + hexA(c, 0.27);
+
+  document.getElementById("dc-day").textContent = d.day;
+  document.getElementById("dc-day").style.color = c;
+  document.getElementById("dc-title").textContent = d.label;
+  document.getElementById("dc-focus").textContent = d.focus;
+  document.getElementById("dc-emoji").textContent = d.emoji;
+
+  document.getElementById("wu-name").textContent = d.warmup.name;
+  document.getElementById("wu-reps").textContent = d.warmup.reps;
+  document.getElementById("wu-note").textContent = d.warmup.note;
+  document.getElementById("ca-name").textContent = d.cardio.name;
+  document.getElementById("ca-reps").textContent = d.cardio.reps;
+  document.getElementById("ca-note").textContent = d.cardio.note;
+
+  document.getElementById("prog-container").innerHTML = buildProgHTML(d.prog, c);
+
+  // Daily push-up section
+  var pd = DAILY_PUSHUPS[dayName];
+  var pushColor = pd ? pd.color : c;
+  document.getElementById("pushday-banner-container").innerHTML = buildPushBanner(dayName, c);
+  document.getElementById("push-sec-lbl").style.color = pushColor;
+  document.getElementById("push-list").innerHTML = pd ? buildList(pd.exercises, expandedPush, "pu", pushColor) : "";
+
+  // Main workout
+  document.getElementById("ex-list").innerHTML = buildList(d.exercises, expandedEx, "ex", c);
+
+  // Stretches
+  document.getElementById("str-list").innerHTML = buildList(STRETCHES, expandedStr, "st", "#64dc96");
+
+  document.getElementById("cd-txt").textContent = d.cooldown;
+
+  var thtml = "";
+  for (var i = 0; i < TIPS.length; i++) {
+    var t = TIPS[i];
+    thtml += '<div class="tip-card' + (i === 4 ? " tip-wide" : "") + '">';
+    thtml += '<div class="tip-icon">' + t.icon + '</div>';
+    thtml += '<div class="tip-title">' + t.title + '</div>';
+    thtml += '<div class="tip-desc">' + t.desc + '</div>';
+    thtml += '</div>';
+  }
+  document.getElementById("tips-grid").innerHTML = thtml;
+}
+
+function selDay(i) {
+  activeDay = i;
+  expandedEx = null;
+  expandedStr = null;
+  expandedPush = null;
+  renderTabs();
+  renderDay();
+  var card = document.getElementById("day-card");
+  card.classList.remove("fade-up");
+  void card.offsetWidth;
+  card.classList.add("fade-up");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function tog(prefix, i) {
+  var scrollId = prefix + i;
+  if (prefix === "ex") {
+    expandedEx = expandedEx === i ? null : i;
+  } else if (prefix === "st") {
+    expandedStr = expandedStr === i ? null : i;
+  } else if (prefix === "pu") {
+    expandedPush = expandedPush === i ? null : i;
+  }
+  renderDay();
+  setTimeout(function () {
+    var el = document.getElementById(scrollId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, 50);
+}
+
+renderTabs();
+renderDay();
 </script>
 </body>
 </html>
