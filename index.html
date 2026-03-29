@@ -146,6 +146,20 @@ h1 span{transition:color .3s}
   </div>
   <div class="ex-list" id="ex-list"></div>
 
+  <!-- Ab Section -->
+  <div style="background:linear-gradient(135deg,rgba(255,160,0,0.08) 0%,#0e0e18 100%);border:1px solid rgba(255,160,0,0.2);border-radius:11px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:center;gap:10px">
+    <div style="font-size:20px">🔥</div>
+    <div>
+      <div style="font-size:12px;font-weight:700;color:#ffa040;letter-spacing:1px;text-transform:uppercase">Daily Ab Circuit</div>
+      <div style="font-size:10px;color:#7a5020;font-family:'Barlow';margin-top:1px">Every day - builds visible abs and supports every other exercise</div>
+    </div>
+  </div>
+  <div class="sec-hdr">
+    <div class="sec-lbl" style="color:#ffa040">Ab Workout</div>
+    <div class="sec-hint">Tap for how-to</div>
+  </div>
+  <div class="ex-list" id="ab-list"></div>
+
   <!-- Height Stretches -->
   <div class="str-banner">
     <div class="str-icon">🌿</div>
@@ -860,6 +874,11 @@ function renderDay() {
   // Stretches
   document.getElementById("str-list").innerHTML = buildList(STRETCHES, expandedStr, "st", "#64dc96");
 
+  // Abs
+  var abIntensity = AB_INTENSITY[dayName] || "light";
+  var abExercises = DAILY_ABS[abIntensity];
+  document.getElementById("ab-list").innerHTML = buildList(abExercises, expandedAb, "ab", "#ffa040");
+
   document.getElementById("cd-txt").textContent = d.cooldown;
 
   var thtml = "";
@@ -879,6 +898,7 @@ function selDay(i) {
   expandedEx = null;
   expandedStr = null;
   expandedPush = null;
+  expandedAb = null;
   renderTabs();
   renderDay();
   var card = document.getElementById("day-card");
@@ -896,6 +916,8 @@ function tog(prefix, i) {
     expandedStr = expandedStr === i ? null : i;
   } else if (prefix === "pu") {
     expandedPush = expandedPush === i ? null : i;
+  } else if (prefix === "ab") {
+    expandedAb = expandedAb === i ? null : i;
   }
   renderDay();
   setTimeout(function () {
@@ -903,6 +925,65 @@ function tog(prefix, i) {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, 50);
 }
+
+var DAILY_ABS = {
+  heavy: [
+    { name:"Crunch", sets:"3", reps:"20", badge:"",
+      note:"Squeeze abs hard at the top - slow on the way down",
+      how:"Lie on your back, knees bent, feet flat on floor. Place hands lightly behind your head - do not pull your neck. Curl your upper body up by squeezing your abs, lifting your shoulder blades off the floor. Hold 1 second at the top. Lower slowly. Do not use momentum - the squeeze is everything." },
+    { name:"Bicycle Crunch", sets:"3", reps:"20 total", badge:"",
+      note:"Twisting hits side abs - go slow for max effect",
+      how:"Lie on your back, hands behind head, knees lifted to 90 degrees. Bring your right elbow toward your left knee while extending your right leg out. Switch sides in a pedaling motion. Go SLOW - rushing kills the effectiveness. Feel your obliques squeezing on each twist." },
+    { name:"Leg Raise", sets:"3", reps:"12-15", badge:"",
+      note:"Lower abs - keep your lower back pressed to the floor",
+      how:"Lie flat on your back, legs straight, hands under your lower back for support. Keeping legs straight, raise them up to 90 degrees then lower slowly back down - do NOT let them touch the floor before the next rep. Keep lower back pressed flat throughout. This hits the lower abs which are hardest to develop." },
+    { name:"5lb Russian Twist", sets:"3", reps:"20 total", badge:"weight",
+      note:"Hold one 5lb weight - twist side to side",
+      how:"Sit on floor, knees bent, feet slightly raised. Hold one 5lb weight with both hands at your chest. Lean back slightly so torso is at 45 degrees. Rotate your whole upper body to the RIGHT touching weight toward the floor. Then rotate LEFT. That is 2 reps. Core stays tight the whole time." },
+    { name:"Hollow Body Hold", sets:"3", reps:"20-30 sec", badge:"",
+      note:"The hardest core exercise - lower back MUST stay on floor",
+      how:"Lie on your back, arms stretched above head, legs straight. Press lower back hard into the floor - it must not lift up. Raise arms, shoulders, and legs just a few inches off the floor. Your body curves like a bowl shape. Hold and breathe. This is what gymnasts train with and is the ultimate core exercise." },
+    { name:"Plank", sets:"3", reps:"30-45 sec", badge:"",
+      note:"Body in a perfect straight line - squeeze everything",
+      how:"Forearms on floor, elbows under shoulders, toes on floor. Body in a perfectly straight line - no sagging hips, no raised butt. Squeeze abs, glutes, and thighs all at once. Breathe normally. Work toward 60 seconds over time." }
+  ],
+  medium: [
+    { name:"Crunch", sets:"3", reps:"15", badge:"",
+      note:"Squeeze at the top - slow and controlled",
+      how:"Lie on back, knees bent, feet flat. Hands lightly behind head. Curl upper body up squeezing abs, shoulder blades off floor. Hold 1 second. Lower slowly. Quality not speed." },
+    { name:"Leg Raise", sets:"2", reps:"10-12", badge:"",
+      note:"Lower abs - back stays flat on the floor",
+      how:"Lie flat, legs straight, hands under lower back. Raise legs to 90 degrees then lower slowly. Do not let feet touch before next rep. Keep lower back pressed flat throughout." },
+    { name:"Bicycle Crunch", sets:"2", reps:"16 total", badge:"",
+      note:"Slow twisting - feel the obliques working",
+      how:"Lie on back, hands behind head, knees lifted. Bring right elbow toward left knee while extending right leg. Switch sides slowly. Feel the side ab squeeze every rep." },
+    { name:"Plank", sets:"3", reps:"30 sec", badge:"",
+      note:"Hold steady - no sagging hips",
+      how:"Forearms on floor, body in straight line. Squeeze everything. Hold 30 seconds breathing normally." }
+  ],
+  light: [
+    { name:"Crunch", sets:"2", reps:"10-12", badge:"",
+      note:"Easy and slow - just keeping abs active today",
+      how:"Lie on back, knees bent. Curl up slowly squeezing abs, hold 1 second, lower slowly. Just 10 to 12 easy reps. Light days keep abs active without causing fatigue before the main workout." },
+    { name:"Plank", sets:"2", reps:"20-30 sec", badge:"",
+      note:"Short hold - maintenance only",
+      how:"Forearms on floor, body straight. Hold 20 to 30 seconds. Easy maintenance on light days. Just enough to keep your core engaged every single day." },
+    { name:"Dead Bug", sets:"2", reps:"6 each side", badge:"",
+      note:"Lower back flat - slow and controlled",
+      how:"Lie on back. Raise both arms up and both knees to 90 degrees. Press lower back FLAT into floor. Slowly lower RIGHT arm overhead and LEFT leg toward floor at the same time without touching. Return and switch. Very slow and controlled." }
+  ],
+  rest: [
+    { name:"Crunch", sets:"1", reps:"10 slow", badge:"",
+      note:"Super easy - just keeping the daily habit alive",
+      how:"Just 10 slow easy crunches. 2 seconds up, hold, 2 seconds down. Sunday is recovery so this is purely about maintaining the daily ab habit. No effort needed at all." },
+    { name:"Plank", sets:"1", reps:"20-30 sec", badge:"",
+      note:"One easy plank - that is all for today",
+      how:"One plank for 20 to 30 seconds. Easy and relaxed. Breathe slowly. This is the minimum to keep your core active every single day of the week." }
+  ]
+};
+
+var AB_INTENSITY = { Monday:"heavy", Tuesday:"light", Wednesday:"medium", Thursday:"heavy", Friday:"light", Saturday:"heavy", Sunday:"rest" };
+var expandedAb = null;
 
 renderTabs();
 renderDay();
