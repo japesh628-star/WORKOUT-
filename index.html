@@ -136,8 +136,6 @@ h1 span{transition:color .3s}
     <div id="pushsection"><div class="shdr"><div class="slbl" id="pushslbl">Push-Up Board Work</div><div class="shint">Tap to expand</div></div><div class="exlist" id="pushlist"></div></div>
     <div class="shdr"><div class="slbl">Main Workout</div><div class="shint">Tap to expand</div></div>
     <div class="exlist" id="exlist"></div>
-    <div class="shdr" id="calhdr"><div class="slbl" id="callbl">Calisthenics</div><div class="shint">No equipment needed</div></div>
-    <div class="exlist" id="callist"></div>
     <div class="shdr" id="strhdr" style="display:none"><div class="slbl" id="strlbl">Stretches</div></div>
     <div class="stretchgrid" id="strlist"></div>
     <div id="cooldown"><span style="font-size:19px">&#x1F9CA;</span><div><div class="cdlbl">Cool Down</div><div class="cdtxt" id="cdtxt"></div></div></div>
@@ -312,88 +310,62 @@ var PULL_PRACTICE={
 };
 
 var PUSH_DAILY={
-  0:{col:'#FF4D4D',banner:'HEAVY PUSH DAY -- Board + Floor',sub:'Main chest day -- slow tempo makes every rep count',ex:[
-    {name:'Standard Floor Push-Up',sets:'3',reps:'15-20',badge:'',note:'Floor warm-up -- log your max every week',how:'Hands shoulder-width on the floor. Body in a straight line. Lower chest all the way down and press up. Go until you cannot. Write the number in the tracker and beat it every week.'},
-    {name:'Green Grip Push-Up',sets:'4',reps:'15',badge:'board',note:'SLOW -- 3 sec down, 1 sec hold, press up',how:'Hands on GREEN handles. Lower in 3 full seconds. Hold 1 second at the bottom. Press back up. 4 sets of 15. The slow tempo makes 15 reps genuinely hard.'},
-    {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Hands wider than shoulders -- 3 sec down',how:'Hands wider than shoulder-width on the floor. Lower in 3 seconds. Press up. Hits your outer chest. Log this number in the tracker.'},
-    {name:'Yellow Grip Push-Up',sets:'4',reps:'10-12',badge:'board',note:'SLOW -- Yellow handles -- 3 sec down -- main grip',how:'YELLOW handles. Lower in 3 seconds. Press up. This is the main board grip to master. 4 sets of 10-12 with slow tempo every rep.'},
-    {name:'Red Grip Push-Up',sets:'3',reps:'8-10',badge:'board',note:'SLOW -- Red handles -- deep chest stretch -- controlled',how:'RED handles. Lower chest letting elbows flare wide in 3 seconds. Press back up. Deep outer chest stretch. 3 sets -- keep it controlled.'},
-    {name:'Slow Negative Floor Push-Up',sets:'3',reps:'6-8',badge:'',note:'6 seconds DOWN -- reset on knees -- do NOT push up',how:'Floor push-up position. Lower yourself for a full 6 seconds all the way to the floor. Reset on your knees. You do not push back up. 6 reps is plenty -- these are brutal.'},
-    {name:'Negative on Yellow Board',sets:'3',reps:'5-6',badge:'board',note:'SLOW -- 5 sec down on board -- chest finisher',how:'YELLOW handles. Lower for 5 full seconds. Reset on knees. 3 sets. Your chest will be exhausted -- that is exactly the point.'},
-    {name:'Floor Push-Up Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- go until you physically cannot -- log it',how:'Hands shoulder-width on the floor. Go until complete failure. Drop to knees when you cannot do full reps and keep going. Write the total number in the tracker. Beat it next Chest Day.'}
+  0:{col:'#FF4D4D',banner:'PUSH DAY -- Board + Floor',sub:'Main chest day -- wide grip and floor, slow and controlled',ex:[
+    {name:'Standard Floor Push-Up',sets:'4',reps:'15-20',badge:'',note:'SLOW -- 3 sec down -- log your max every week',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 full seconds. Press up. Go until you cannot do another full rep. Write the number in the tracker and beat it every week.'},
+    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles on the board -- 3 sec down',how:'Hands on the WIDE handles of the board. Lower in 3 full seconds, elbows flaring slightly out. Press back up. 4 sets of 12-15. This is your main board grip now -- focus all your effort on getting stronger here.'},
+    {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Hands wider than shoulders -- 3 sec down',how:'Hands wider than shoulder-width on the floor. Lower in 3 seconds. Press up. Hits your outer chest. Log this number in the tracker too.'}
   ]},
-  3:{col:'#00C853',banner:'HEAVY PUSH DAY -- All grips + Floor',sub:'Second push day -- same intensity, full board run',ex:[
-    {name:'Standard Floor Push-Up',sets:'3',reps:'15-20',badge:'',note:'Floor warm-up -- beat last week by 1 rep',how:'Hands shoulder-width on the floor. Go to failure. Write your number in the tracker. Try to beat last week by even 1 rep.'},
-    {name:'Green Grip Push-Up',sets:'4',reps:'15',badge:'board',note:'SLOW -- Green handles -- 3 sec down every rep',how:'GREEN handles. 3 seconds down every single rep. 15 reps per set. If it feels easy your tempo is too fast.'},
-    {name:'Wide Push-Up on Floor',sets:'3',reps:'12-15',badge:'',note:'SLOW -- Wide hands -- 3 sec down -- outer chest',how:'Hands wider than shoulder-width. 3 seconds down every rep. Outer chest focus. 3 sets.'},
-    {name:'Yellow Grip Push-Up',sets:'4',reps:'10-12',badge:'board',note:'SLOW -- Yellow handles -- slow and controlled',how:'YELLOW handles. 3 seconds down. Work toward 12 clean reps across all 4 sets.'},
-    {name:'Blue Grip Push-Up',sets:'4',reps:'6-8',badge:'board',note:'SLOW -- Blue handles -- narrowest -- pure triceps',how:'BLUE handles. Hands close together. Elbows point straight BACK not out. Lower slowly. 6 reps is solid. Drop to knees if needed. Rest 90 sec between sets.'},
-    {name:'Close-Grip Floor Push-Up',sets:'3',reps:'8-10',badge:'',note:'SLOW -- Hands closer than shoulder width -- tricep finisher',how:'Hands slightly closer than shoulder-width on the floor. Elbows stay close to your sides. Lower in 3 seconds. After Blue grip your triceps will already be working -- push through it.'},
-    {name:'Slow Tempo Yellow',sets:'3',reps:'5-6',badge:'board',note:'SLOW -- 4 sec down, 1 sec hold, 2 sec up',how:'YELLOW handles. Lower in 4 seconds. Hold 1 second. Press up in 2 seconds. That is 7 seconds per rep. 5 reps takes 35 seconds. Serious set.'},
-    {name:'Wide Push-Up Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- wide hands -- go until you drop -- log it',how:'Wide hands on the floor. Go to complete failure. Drop to knees and keep going. Write the number in the tracker.'}
+  3:{col:'#00C853',banner:'PUSH DAY -- Board + Floor',sub:'Second push day -- same simple combo, same intensity',ex:[
+    {name:'Standard Floor Push-Up',sets:'4',reps:'15-20',badge:'',note:'SLOW -- 3 sec down -- beat last week by 1 rep',how:'Hands shoulder-width on the floor. Lower in 3 seconds. Press up. Go to failure. Write your number in the tracker. Try to beat last week by even 1 rep.'},
+    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles -- slow and controlled',how:'Hands on the WIDE handles of the board. Lower in 3 seconds, elbows flaring slightly. Press up. 4 sets of 12-15. Same as Chest Day -- focus on getting a rep or two stronger each week.'},
+    {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Wide hands -- 3 sec down -- outer chest',how:'Hands wider than shoulder-width on the floor. 3 seconds down every rep. Outer chest focus. 4 sets.'}
   ]},
-  5:{col:'#7C4DFF',banner:'POWER PUSH DAY -- Full ladder + Max test',sub:'Run every grip and test your floor numbers -- log everything',ex:[
-    {name:'Standard Floor Push-Up Max Test',sets:'3',reps:'Max -- log every rep',badge:'',note:'Most important number -- log it in Progress tab',how:'Hands shoulder-width on the floor. Go to complete failure every set. Write every number in the tracker. This is your main push-up score.'},
-    {name:'Full Board Color Ladder',sets:'3',reps:'Max each color',badge:'board',note:'Green to Yellow to Red to Blue -- no rest between colors',how:'Max reps on GREEN then without stopping move to YELLOW, then RED, then BLUE. That whole run is 1 set. Rest 2 min. 3 sets total. Write your total reps every week.'},
-    {name:'Wide Push-Up Max',sets:'2',reps:'Max reps',badge:'',note:'Wide floor -- go to failure -- log it',how:'Hands wider than shoulder-width. Go to failure. Write your number in the tracker every Power Day.'},
-    {name:'Blue Grip Finisher',sets:'3',reps:'Max to failure',badge:'board',note:'Blue handles -- go until you literally cannot -- log it',how:'BLUE handles. Elbows pointing back. Go until you fail. Write the number and beat it by 1 rep every week.'},
-    {name:'Close-Grip Floor Max',sets:'2',reps:'Max reps',badge:'',note:'Hands close -- go to failure -- tricep test',how:'Hands slightly closer than shoulder-width. Go to failure. Write your number. Tracks your tricep pushing strength week over week.'},
-    {name:'Slow Negative Floor Push-Up',sets:'3',reps:'5',badge:'',note:'6 seconds down -- strength finisher',how:'Floor push-up position. Lower for 6 full seconds. Your chest is already exhausted -- these finishing negatives are the most effective thing you can do at this point.'},
-    {name:'Total Burnout',sets:'1',reps:'Max -- log total',badge:'burnout',note:'Standard to Wide to Close -- no rest -- log total in tracker',how:'Floor push-ups to failure, immediately wide to failure, immediately close-grip to failure. Count every single rep and log the total. This is your weekly power benchmark.'}
+  5:{col:'#7C4DFF',banner:'POWER PUSH DAY -- Max Test',sub:'Same two movements -- test your max numbers and log them',ex:[
+    {name:'Standard Floor Push-Up Max Test',sets:'3',reps:'Max -- log every rep',badge:'',note:'Most important number -- log it in Progress tab',how:'Hands shoulder-width on the floor. Go to complete failure every set. Write every number in the tracker. This is your main push-up score. Watch it grow every week.'},
+    {name:'Wide Grip Push-Up Max — Board',sets:'3',reps:'Max',badge:'board',note:'Wide handles -- go to failure -- log it',how:'Hands on the WIDE handles. Go to complete failure each set. Write your number in the tracker every Power Day and try to beat it.'},
+    {name:'Wide Push-Up Max',sets:'2',reps:'Max reps',badge:'',note:'Wide floor -- go to failure -- log it',how:'Hands wider than shoulder-width on the floor. Go to failure. Write your number in the tracker every Power Day.'}
   ]},
   1:{col:'#FF8C00',banner:'LIGHT PUSH -- Back Day maintenance',sub:'Easy reps only -- chest stays fresh for the next push day',ex:[
     {name:'Standard Floor Push-Up',sets:'2',reps:'10 slow',badge:'',note:'SLOW -- 3 sec down, 2 sec up -- easy only',how:'10 easy floor push-ups. 3 seconds down, 2 seconds up. Stop at 10 even if you could do more. Just keeping muscle memory alive.'},
-    {name:'Green Grip Push-Up',sets:'2',reps:'8 slow',badge:'board',note:'SLOW -- Green handles -- extremely slow -- zero effort',how:'GREEN handles. 8 reps at a crawl. 4 seconds down, hold 1, 3 seconds up. No effort. Just keeping the habit alive.'},
-    {name:'Wide Push-Up',sets:'1',reps:'8 slow',badge:'',note:'SLOW -- Wide hands -- easy -- just blood flow',how:'Wide hands on the floor. 8 slow reps. Nothing hard. Just moving blood through your chest muscles to help them recover.'}
+    {name:'Wide Grip Push-Up — Board',sets:'2',reps:'8 slow',badge:'board',note:'SLOW -- Wide handles -- extremely slow -- zero effort',how:'Hands on the WIDE handles. 8 reps at a crawl. 4 seconds down, hold 1, 3 seconds up. No effort. Just keeping the habit alive on a back day.'}
   ]}
 };
 
+
 var DAYS=[
-  {day:'Chest Day',label:'CHEST + SHOULDERS',emoji:'&#128170;',color:'#FF4D4D',focus:'Heavy Push - Board Colors - 5lb Weights - Calisthenics',hasPullPrac:false,
+  {day:'Chest Day',label:'CHEST + SHOULDERS',emoji:'&#128170;',color:'#FF4D4D',focus:'Push Day - Board + Floor - 5lb Muscle Building',hasPullPrac:false,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Steady pace -- warm up chest and wrists'},
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up to hip height -- arms pumping'},
    cooldown:'5 min easy walk + doorway chest stretch + wrist circles',pushStretches:true,
-   cal:[
-    {name:'Pike Push-Up',sets:'3',reps:'8-10',badge:'cal',note:'Hips high -- lower head toward floor -- shoulder angle',how:'Start in a push-up position then walk your feet toward your hands until your hips are high making an upside-down V shape. Lower the top of your head toward the floor by bending your elbows. Press back up. Hits your shoulders at a different angle to normal push-ups. Easy to learn.'},
-    {name:'Wide Push-Up Hold',sets:'3',reps:'10-15 sec hold',badge:'cal',note:'Wide hands -- hold at the bottom -- chest stretch',how:'Get into a wide push-up position. Lower yourself to the bottom and hold there for 10-15 seconds. Feel the stretch across your chest. Press back up. Holding the bottom position builds serious chest strength without equipment.'},
-    {name:'Jumping Jacks',sets:'2',reps:'30 sec',badge:'cal',note:'Full range -- arms all the way up -- gets blood moving',how:'Stand with feet together arms at sides. Jump feet out wide while raising both arms overhead at the same time. Jump back to start. Keep a steady rhythm for 30 seconds. Good active rest between harder sets.'}
-   ],
    exercises:[
     {name:'5lb Chest Fly',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- full chest stretch every rep',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights above chest. Lower both arms wide like wings in 4 full seconds until elbows nearly touch the floor. Bring back together slowly. 4 sets.'},
     {name:'5lb Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Floor press -- 3 sec down, squeeze at top',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights at chest height. Lower in 3 seconds. Press straight up until arms lock. Squeeze your chest hard at the top. 4 sets.'},
+    {name:'5lb Incline Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Lean back against a wall or incline -- upper chest',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on a slight incline or lean your back against a stack of pillows so your torso is at an angle. Press both weights up and slightly back over your face. Lower in 3 seconds. Hits the upper chest differently than a flat press. 4 sets.'},
     {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Press overhead -- 3 sec down -- core tight',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight -- no arching your back. 4 sets.'},
     {name:'5lb Lateral Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- shoulder width builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides. Raise both arms out to shoulder height. Lower very slowly in 4 full seconds. By rep 15 this will burn. 4 sets.'},
     {name:'5lb Front Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight arms -- 3 sec down -- no swinging',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights on thighs palms down. Raise both arms forward to eye level. Arms stay straight. Lower in 3 seconds. No swinging. 4 sets.'},
+    {name:'5lb Tricep Overhead Extension',sets:'3',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold one 5lb weight with both hands above your head. Lower behind your head bending only at the elbows in 3 seconds. Press back up. Upper arms stay still. 3 sets.'},
     {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core iron tight -- add 5 sec every week -- log your time',how:'Hands on floor arms straight. Body perfectly straight from head to heels. Squeeze everything. 45-60 seconds. Add 5 seconds every week. Write your time in the tracker.'},
     {name:'5lb Lateral Raise Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- raise until your arms give out -- log it',how:'Same as your regular lateral raise but do not stop at 20. Keep going until you physically cannot lift your arms to shoulder height. Write your total. Beat it next Chest Day.'}
   ]},
-  {day:'Back Day',label:'BACK + SCAPULA',emoji:'&#128293;',color:'#FF8C00',focus:'Scapula Work - Full Back - 5lb Biceps - Calisthenics',hasPullPrac:true,
+  {day:'Back Day',label:'BACK + SCAPULA',emoji:'&#128293;',color:'#FF8C00',focus:'Scapula Work - Full Back - 5lb Biceps',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Try double-unders if ready'},
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up fast -- arms pumping the whole time'},
    cooldown:'5 min easy walk + bicep stretch + lat stretch',pushStretches:false,
-   cal:[
-    {name:'Inverted Row -- Table Edge',sets:'3',reps:'8-12',badge:'cal',note:'Lie under a table -- pull chest up to edge -- back builder',how:'Lie on your back under a sturdy table. Grip the edge of the table with both hands about shoulder-width. Your body is in a straight line. Pull your chest up to the table edge by squeezing your shoulder blades together and pulling your elbows back. Lower slowly. Bend your knees to make it easier. Trains the exact same muscles as a pull-up.'},
-    {name:'Bear Crawl',sets:'3',reps:'20 sec',badge:'cal',note:'Hands and feet -- knees just off the floor -- forward and back',how:'Get on all fours with knees hovering just 1 inch off the floor. Move your right hand and left foot forward at the same time, then left hand and right foot. Keep your back flat and hips low the whole time. Forward for 10 seconds then backward for 10 seconds. Looks easy -- is not easy.'},
-    {name:'Superman Hold',sets:'3',reps:'8 reps, 3 sec hold',badge:'cal',note:'Face down -- raise arms and legs -- lower back strength',how:'Lie face down, arms stretched overhead. Raise both arms and both legs off the floor at the same time and hold for 3 seconds. Lower slowly. Builds your lower back and the muscles around your shoulder blades -- directly helps your scapular work.'}
-   ],
    exercises:[
     {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main back builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to your hips. Squeeze shoulder blades hard at the top. Lower in 3 full seconds. 4 sets.'},
     {name:'5lb Single-Arm Row',sets:'4',reps:'10 each side',badge:'weight',note:'SLOW -- Drive elbow past hip -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. One hand on a chair. Pull one elbow straight up past your hip. Squeeze 1 second at top. Lower in 3 seconds. 10 each side. 4 sets.'},
+    {name:'5lb Pullover',sets:'3',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight overhead — lats and back',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back. Hold one 5lb weight with both hands straight above your chest. Keeping arms slightly bent, lower the weight back over your head toward the floor in 3 seconds. Bring it back up squeezing your back and lats. 3 sets.'},
     {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
     {name:'5lb Hammer Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Thumbs up -- 4 sec down -- forearms and biceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Thumbs pointing up. Curl up, squeeze at top, lower in 4 seconds. Builds forearms for grip strength. 4 sets.'},
     {name:'5lb Shrug',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight up -- hold 1 sec -- upper trap builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold weights at sides. Shrug straight up toward your ears. Hold 1 second at top. Lower slowly. Builds the muscles connecting your neck and upper back. 4 sets.'},
     {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core tight -- add 5 sec every week -- log your time',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Write your time in the tracker every week.'},
     {name:'5lb Bicep Curl Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- curl until nothing works -- log it',how:'Curl both weights as many times as possible with full range. When you cannot do full reps do partial reps halfway up. Keep going until nothing moves. Write the number.'}
   ]},
-  {day:'Core Day',label:'CORE + STABILITY',emoji:'&#128297;',color:'#FFD700',focus:'Full Core - Scapula Work - Calisthenics - No Equipment',hasPullPrac:true,
+  {day:'Core Day',label:'CORE + STABILITY',emoji:'&#128297;',color:'#FFD700',focus:'Full Core - Scapula Work - No Equipment',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'400 jumps',note:'Steady pace -- get your core warm'},
    cardio:{name:'Jumping Jacks',reps:'3 x 40 sec',note:'Full range -- arms all the way overhead every rep'},
    cooldown:'5 min easy walk + lying spinal twist both sides',pushStretches:false,
-   cal:[
-    {name:'L-Sit Hold -- Floor',sets:'3',reps:'5-10 sec hold',badge:'cal',note:'Hands on floor -- legs straight out -- core killer',how:'Sit on the floor with legs straight out in front of you. Put your hands flat on the floor right next to your hips. Press down through your hands and try to lift your whole body off the floor. Even getting your heels an inch off the floor is a win. Hold as long as you can. Builds incredible core and shoulder strength.'},
-    {name:'Hollow Rock',sets:'3',reps:'10-15 sec',badge:'cal',note:'Hollow hold position -- rock forward and back gently',how:'Lie on your back. Press your lower back flat into the floor. Raise both arms overhead and both legs off the floor. Now gently rock forward and back like a rocking chair while keeping that hollow shape. If the rocking feels weird just hold still -- that is fine. One of the best core exercises there is.'},
-    {name:'Bear Crawl',sets:'3',reps:'20 sec',badge:'cal',note:'Knees just off the floor -- move forward and back',how:'On all fours with knees hovering 1 inch off the floor. Move right hand and left foot forward together, then left hand and right foot. Back flat, hips low. Forward for 10 seconds, backward for 10 seconds. Harder than it looks every time.'}
-   ],
    exercises:[
     {name:'Plank Hold',sets:'5',reps:'45-60 sec',badge:'',note:'5 sets today -- main core move -- log your best time',how:'Hands on floor arms straight. Body perfectly straight. Squeeze core, glutes, and legs all at once. 45-60 seconds. Add 5 seconds every week. Write your time in the tracker.'},
     {name:'Side Plank',sets:'3',reps:'30-40 sec each side',badge:'',note:'One arm -- hips up -- obliques working hard',how:'Lie on your side. Prop up on one hand or elbow. Body in a straight line from head to feet. Hold without letting hips drop. 30-40 seconds each side.'},
@@ -401,52 +373,40 @@ var DAYS=[
     {name:'Dead Bug',sets:'3',reps:'8 each side',badge:'',note:'Opposite arm and leg -- lower back stays flat always',how:'Lie on your back, arms straight up, knees bent at 90 degrees in the air. Lower right arm overhead and left leg toward the floor simultaneously without letting your lower back lift. Switch sides. Slow and controlled every rep.'},
     {name:'Mountain Climbers',sets:'4',reps:'35 sec',badge:'',note:'Hips LOW -- drive knees as fast as possible',how:'Plank on your hands. Drive one knee toward chest then quickly switch. As fast as possible for 35 seconds. Hips stay low. No bouncing. 20 sec rest between sets.'},
     {name:'5lb Weighted Crunch',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Hold weight at chest -- 3 sec up, 2 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back knees bent. Hold one 5lb weight at chest. Curl your upper back off the floor in 3 seconds. Hold 1 second at top. Lower in 2 seconds. Do not yank your neck. 4 sets.'},
+    {name:'5lb Side Bend',sets:'3',reps:'15 each side',badge:'weight',note:'SLOW -- One weight at your side -- bend and squeeze obliques',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Stand holding one 5lb weight in one hand at your side. Bend sideways toward the weight then squeeze your obliques to pull yourself back up straight. Lower in 3 seconds. 15 reps then switch the weight to your other hand and do the other side.'},
     {name:'Plank Burnout',sets:'1',reps:'Max hold to failure',badge:'burnout',note:'Final hold -- go until you collapse -- log your time',how:'Get into plank and hold as long as humanly possible. When your hips start dropping you are done. Write your time in the tracker. This is your weekly core benchmark.'}
   ]},
-  {day:'Shoulder Day',label:'SHOULDERS + PUSH',emoji:'&#9889;',color:'#00C853',focus:'All 4 Board Colors - Full Shoulders - Calisthenics',hasPullPrac:false,
+  {day:'Shoulder Day',label:'SHOULDERS + PUSH',emoji:'&#9889;',color:'#00C853',focus:'Push Day - Full Shoulders - 5lb Muscle Building',hasPullPrac:false,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Alternate feet every 50 jumps'},
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'30 sec fast then 30 sec walk -- repeat 3 times'},
    cooldown:'5 min easy walk + shoulder and chest stretch',pushStretches:true,
-   cal:[
-    {name:'Pike Push-Up',sets:'4',reps:'8-12',badge:'cal',note:'Hips high -- lower head toward floor -- shoulder press',how:'Walk feet toward hands until hips are high making a V shape. Lower the top of your head toward the floor by bending your elbows. Press back up. 4 sets. This is the main calisthenics shoulder move -- directly complements all your dumbbell shoulder work.'},
-    {name:'Wall Handstand Hold',sets:'3',reps:'15-20 sec',badge:'cal',note:'Back against wall upside down -- hold still -- shoulder strength',how:'Stand facing away from a wall. Kick up so your feet are against the wall above you and your hands are on the floor. You are upside down with the wall supporting your feet. Hold still for 15-20 seconds. Just kick up gently and hold. Builds serious shoulder stability.'},
-    {name:'Arm Circles',sets:'2',reps:'15 each direction',badge:'cal',note:'Big slow circles -- forward then backward -- shoulder warm-down',how:'Stretch both arms out to the sides. Make large slow circles forward 15 times then backward 15 times. Keep your arms straight and make the circles as big as possible. Good active recovery between hard shoulder sets.'}
-   ],
    exercises:[
     {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main shoulder builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight. 4 sets.'},
     {name:'5lb Lateral Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- shoulder width',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides. Raise both arms out to shoulder height. Lower in 4 full seconds. By rep 15 they should be burning. 4 sets.'},
     {name:'5lb Front Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight arms -- 3 sec down -- no swinging',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights on thighs palms down. Raise both arms forward to eye level. Lower in 3 seconds. No swinging. 4 sets.'},
     {name:'5lb Arnold Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Rotate palms as you press -- all 3 shoulder heads',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms facing YOU. As you press overhead rotate wrists so palms face FORWARD at the top. Reverse on the way down. Builds all three parts of your shoulder. 4 sets.'},
+    {name:'5lb Bent-Over Rear Delt Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Hinge forward -- raise arms wide -- rear shoulders',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward at your waist, weights hanging, palms facing each other. Raise both arms out wide to the sides like wings up to shoulder height. Squeeze your shoulder blades at the top. Lower in 3 seconds. 4 sets.'},
     {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core and shoulder stability -- hold strong',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Shoulder stability directly helps your push-up strength.'},
     {name:'5lb Shoulder Press Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- press until your arms give out -- log it',how:'Same as your regular shoulder press. Go until you literally cannot press the weights overhead anymore. Write your total reps in the tracker.'}
   ]},
-  {day:'Arms Day',label:'BACK + ARMS',emoji:'&#127754;',color:'#00B0FF',focus:'Scapula Work - 5lb Arms - Dips - Calisthenics',hasPullPrac:true,
+  {day:'Arms Day',label:'BACK + ARMS',emoji:'&#127754;',color:'#00B0FF',focus:'5lb Arms - Muscle Building',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Focus on wrist rotation -- relax your arms'},
    cardio:{name:'Jumping Jacks',reps:'3 x 40 sec',note:'Full range -- steady rhythm -- shake out arms between sets'},
    cooldown:'5 min easy walk + full arm and back stretch + wrist circles',pushStretches:false,
-   cal:[
-    {name:'Chair Dips',sets:'3',reps:'8-12',badge:'cal',note:'Hands on chair edge behind you -- lower and press -- triceps',how:'Sit on the edge of a sturdy chair. Place your hands on the edge beside your hips fingers pointing forward. Slide your body off the chair. Lower yourself by bending your elbows until they reach about 90 degrees. Press back up. Keep your back close to the chair. Best bodyweight tricep exercise there is. Bend your knees to make it easier.'},
-    {name:'Inverted Row -- Table Edge',sets:'3',reps:'8-12',badge:'cal',note:'Under the table -- pull chest up -- back and biceps',how:'Lie on your back under a sturdy table. Grip the edge with both hands shoulder-width. Body in a straight line. Pull your chest up to the table edge by squeezing your shoulder blades and pulling elbows back. Lower slowly. Bend your knees to make it easier. Trains the exact muscles you need for pull-ups.'},
-    {name:'Bear Crawl',sets:'2',reps:'20 sec',badge:'cal',note:'Knees just off floor -- forward and back -- full body',how:'On all fours with knees hovering 1 inch off the floor. Move right hand and left foot forward together then left hand and right foot. Back flat, hips low. Forward for 10 seconds, backward for 10 seconds. Arms and core working the whole time.'}
-   ],
    exercises:[
     {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both arms -- 3 sec down -- squeeze at top',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to hips. Squeeze shoulder blades hard. Lower in 3 seconds. 4 sets.'},
     {name:'5lb Concentration Curl',sets:'4',reps:'10 each arm',badge:'weight',note:'SLOW -- Elbow on thigh -- 4 sec down -- zero cheating',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on chair edge. Brace elbow on inside of thigh. Curl to your shoulder. Squeeze hard at top. Lower in 4 full seconds. 10 each side. 4 sets.'},
+    {name:'5lb Tricep Kickback',sets:'4',reps:'15 each arm',badge:'weight',note:'SLOW -- Hinge forward -- extend arm fully back -- triceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward at the waist holding one 5lb weight. Tuck your elbow to your side at 90 degrees then straighten your arm back fully. Squeeze 1 second. Bring back in 3 seconds. Do both arms. 4 sets.'},
     {name:'5lb Tricep Overhead Extension',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold one 5lb weight with both hands above your head. Lower behind your head bending only at the elbows in 3 seconds. Press back up. Upper arms stay still. 4 sets.'},
     {name:'5lb Hammer Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Thumbs up -- 4 sec down -- forearms and biceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Thumbs pointing up. Curl up, squeeze at top, lower in 4 seconds. Builds your forearms for grip strength. 4 sets.'},
     {name:'5lb Wrist Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Palms up -- forearm and grip builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on chair, forearms on thighs, palms UP. Let weights roll to fingertips then curl wrists up as high as possible. Lower slowly. Grip strength is a pull-up limiter -- build it every session. 4 sets.'},
     {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core strength carries into every pull-up and hang',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Add 5 seconds every week.'},
     {name:'5lb Bicep Curl Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- curl until nothing works -- log it',how:'Curl both weights as many times as possible. When you cannot do full reps do partial reps halfway up. Keep going until absolutely nothing moves. Write the number.'}
   ]},
-  {day:'Power Day',label:'FULL POWER',emoji:'&#128640;',color:'#7C4DFF',focus:'Full Body - Board Max - Scapula Test - Calisthenics',hasPullPrac:true,
+  {day:'Power Day',label:'FULL POWER',emoji:'&#128640;',color:'#7C4DFF',focus:'Full Body - Board Max - Scapula Test',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'600 jumps',note:'Extra 100 today -- push your pace'},
    cardio:{name:'High Knees',reps:'4 x 30 sec',note:'Extra effort today -- drive those knees -- earn it'},
    cooldown:'10 min easy walk + full body stretch -- you earned it',pushStretches:true,
-   cal:[
-    {name:'Broad Jump',sets:'3',reps:'5 jumps',badge:'cal',note:'Jump forward as far as you can -- land soft -- full body power',how:'Stand with feet shoulder-width. Swing your arms back then swing them forward explosively as you jump forward as far as you can. Land softly with bent knees. Walk back and repeat. 5 jumps per set. Builds explosive power through your whole body.'},
-    {name:'Jump Squat',sets:'3',reps:'8',badge:'cal',note:'Squat down then explode up -- land soft -- power training',how:'Feet shoulder-width. Squat down until thighs are parallel to the floor. Explode upward jumping as high as you can. Land softly with bent knees and go straight into the next squat. 8 reps per set. The most powerful bodyweight movement there is.'},
-    {name:'Burpee',sets:'3',reps:'8',badge:'cal',note:'Full body -- step if you need to -- power and conditioning',how:'Stand. Hands to floor. Jump or step feet back to plank. Do one push-up. Jump feet forward. Stand and jump up reaching overhead. That is 1 rep. Step instead of jump if needed. 8 reps per set.'}
-   ],
    exercises:[
     {name:'Mountain Climbers',sets:'4',reps:'35 sec',badge:'',note:'Hips LOW -- drive knees as fast as possible',how:'Plank on your hands. Drive one knee toward chest then quickly switch. As fast as possible for 35 seconds. Hips stay low. No bouncing. 20 sec rest between sets.'},
     {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both arms -- squeeze hard at top -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to hips. Squeeze shoulder blades hard. Lower in 3 seconds. 4 sets.'},
@@ -459,18 +419,13 @@ var DAYS=[
    warmup:{name:'Easy Walk',reps:'5 min',note:'No intensity -- just get blood moving'},
    cardio:{name:'Easy Walk',reps:'10-15 min',note:'Outside if possible -- fresh air and easy movement'},
    cooldown:'Legs up the wall 5 min -- best recovery position there is',pushStretches:false,
-   cal:[
-    {name:'Bear Crawl',sets:'2',reps:'20 sec',badge:'cal',note:'Very easy today -- just gentle movement',how:'On all fours with knees hovering just off the floor. Move forward and back gently for 20 seconds. Nothing hard on rest day. Just keeping your joints moving and blood flowing.'},
-    {name:'Arm Circles',sets:'2',reps:'10 each direction',badge:'cal',note:'Big slow circles -- keeps shoulder joints feeling good',how:'Arms out to the sides. Large slow circles forward 10 times then backward 10 times. Smooth and easy. Keeps your shoulders healthy after a hard week.'},
-    {name:'Jumping Jacks',sets:'2',reps:'20 slow',badge:'cal',note:'Easy pace -- just get the blood moving -- not a workout',how:'Slow easy jumping jacks. 20 reps at a comfortable pace. This is not a workout -- just light movement to help your muscles recover faster.'}
-   ],
    exercises:[
     {name:'5lb Shoulder Circles',sets:'2',reps:'10 each way',badge:'weight',note:'SLOW -- Keeps shoulder joints healthy after a hard week',how:'SLOW AND CONTROLLED -- smooth circles, no rushing. Weights at sides. Large slow circles forward 10 times then backward 10 times. Smooth and controlled. Keeps your shoulders feeling good.'},
     {name:'5lb Lateral Raise',sets:'2',reps:'10',badge:'weight',note:'Light and easy -- slow and relaxed -- just keeping blood flowing',how:'SLOW AND CONTROLLED -- 3 seconds down, pause, 2 seconds up. Weights at sides. Raise both arms out to shoulder height slowly. Lower slowly. Nothing hard today. Just moving blood through your muscles so they recover faster.'}
   ]}
 ];
 
-var expEx=null,expPush=null,expPull=null,expCal=null,activeDay=0;
+var expEx=null,expPush=null,expPull=null,activeDay=0;
 
 function renderTabs(){
   var h='';
@@ -523,13 +478,6 @@ function render(){
     document.getElementById('pushlist').innerHTML=pb2+mkList(pd.ex,expPush,'pu',bc);
   }else{pushSec.style.display='none';}
   document.getElementById('exlist').innerHTML=mkList(d.exercises,expEx,'ex',c);
-  var calHdr=document.getElementById('calhdr');
-  var calList=document.getElementById('callist');
-  if(d.cal&&d.cal.length){
-    calHdr.style.display='';
-    document.getElementById('callbl').style.color=c;
-    calList.innerHTML=mkList(d.cal,expCal,'ca',c);
-  }else{calHdr.style.display='none';calList.innerHTML='';}
   var stretches=HS.slice();
   var strLabel='Stretches';
   if(d.pushStretches){stretches=PS.concat(stretches);strLabel='Post-Push + Height Stretches';}
@@ -541,7 +489,7 @@ function render(){
 }
 
 function selDay(i){
-  activeDay=i;expEx=null;expPush=null;expPull=null;expCal=null;
+  activeDay=i;expEx=null;expPush=null;expPull=null;
   renderTabs();render();
   var card=document.getElementById('daycard');
   card.classList.remove('fu');void card.offsetWidth;card.classList.add('fu');
@@ -552,7 +500,6 @@ function tog(pfx,i){
   if(pfx==='ex')expEx=expEx===i?null:i;
   else if(pfx==='pu')expPush=expPush===i?null:i;
   else if(pfx==='pp')expPull=expPull===i?null:i;
-  else if(pfx==='ca')expCal=expCal===i?null:i;
   render();
   var id=pfx+i;
   setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},50);
