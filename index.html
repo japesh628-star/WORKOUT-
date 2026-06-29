@@ -1,3 +1,4 @@
+cat > /mnt/user-data/outputs/workout.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +20,6 @@ body{background:#0a0a0f;color:#fff;font-family:"Barlow Condensed",sans-serif;min
 h1{font-size:clamp(17px,5vw,30px);font-weight:900;letter-spacing:2px;text-transform:uppercase;line-height:1.05}
 h1 span{transition:color .3s}
 #main{max-width:660px;margin:0 auto;padding:14px 14px 80px}
-#navtabs{display:flex;gap:0;margin-bottom:18px;background:#13131a;border-radius:12px;padding:4px;border:1px solid #1c1c26}
-.nvtab{flex:1;border-radius:9px;padding:9px 4px;cursor:pointer;font-family:"Barlow Condensed";font-weight:700;font-size:11px;letter-spacing:1px;text-align:center;text-transform:uppercase;color:#444;transition:all .2s;border:none;background:none}
-.nvtab.on{background:#1e1e2a;color:#fff}
 #tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px;scrollbar-width:none}
 #tabs::-webkit-scrollbar{display:none}
 .tab{border-radius:10px;padding:7px 11px;cursor:pointer;font-family:"Barlow Condensed";font-weight:700;font-size:10px;letter-spacing:1px;white-space:nowrap;text-transform:uppercase;border:2px solid #222;background:#16161e;color:#666;transition:all .2s;flex-shrink:0}
@@ -32,6 +30,20 @@ h1 span{transition:color .3s}
 .dtitle{font-size:clamp(20px,6vw,30px);font-weight:900;letter-spacing:2px;text-transform:uppercase}
 .dfocus{font-size:12px;color:#666;font-family:"Barlow";margin-top:3px}
 .dem{font-size:40px}
+
+/* PRE-WORKOUT SECTION */
+.preworkout-wrap{border-radius:14px;padding:15px 16px;margin-bottom:14px;border:2px dashed #333}
+.pw-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.pw-icon{font-size:22px}
+.pw-title{font-size:13px;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+.pw-sub{font-size:10px;color:#555;font-family:"Barlow";margin-top:1px}
+.pw-steps{display:flex;flex-direction:column;gap:7px}
+.pw-step{display:flex;align-items:flex-start;gap:10px;background:#0e0e18;border-radius:10px;padding:10px 12px}
+.pw-num{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;margin-top:1px}
+.pw-body{}
+.pw-name{font-size:12px;font-weight:700;letter-spacing:.5px}
+.pw-detail{font-size:10px;color:#666;font-family:"Barlow";margin-top:2px;line-height:1.5}
+
 #wcg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
 .wcc{background:#13131a;border-radius:11px;padding:12px}
 .wlbl{font-size:9px;letter-spacing:3px;font-weight:700;margin-bottom:4px;text-transform:uppercase}
@@ -61,7 +73,6 @@ h1 span{transition:color .3s}
 .bweight{background:rgba(100,180,255,.1);color:#64b4ff;border:1px solid rgba(100,180,255,.2)}
 .bpull{background:rgba(160,100,255,.1);color:#b47dff;border:1px solid rgba(160,100,255,.2)}
 .bburnout{background:rgba(255,60,60,.12);color:#ff5050;border:1px solid rgba(255,60,60,.25)}
-.bcal{background:rgba(0,230,120,.1);color:#00e678;border:1px solid rgba(0,230,120,.2)}
 .stretchgrid{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
 .stretchcard{background:#13131a;border-radius:11px;padding:13px 14px;border:1px solid #1c1c26}
 .stname{font-size:13px;font-weight:700;letter-spacing:.3px;margin-bottom:3px}
@@ -85,155 +96,48 @@ h1 span{transition:color .3s}
 .pill{font-size:10px;font-family:"Barlow";border-radius:20px;padding:4px 9px;border:1px solid #222;background:#111;color:#444;cursor:pointer;transition:all .2s}
 .pill.done{color:#555;border-color:#2a2a2a;text-decoration:line-through}
 .pill.cur{font-weight:700;color:#000}
-#motbanner{border-radius:13px;padding:14px 16px;margin-bottom:16px;border:1px solid #222;background:#0e0e18;display:flex;gap:12px;align-items:flex-start}
-.motday{font-size:9px;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:#444;margin-bottom:4px}
-.motquote{font-size:15px;font-weight:800;letter-spacing:.5px;line-height:1.3;text-transform:uppercase}
-.motsub{font-size:11px;font-family:"Barlow";color:#555;margin-top:5px;line-height:1.5}
-.motico{font-size:28px;flex-shrink:0;margin-top:2px}
-.trk-week{background:#13131a;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #1c1c26}
-.trk-wtitle{font-size:10px;letter-spacing:3px;font-weight:700;text-transform:uppercase;color:#444;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.trk-clr{font-size:9px;color:#333;cursor:pointer;font-family:"Barlow";letter-spacing:1px;padding:3px 8px;border:1px solid #222;border-radius:6px}
-.trk-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.trk-item{background:#0e0e15;border-radius:9px;padding:10px 11px;border:1px solid #181820}
-.trk-label{font-size:9px;letter-spacing:2px;font-weight:700;text-transform:uppercase;color:#444;margin-bottom:6px}
-.trk-input{background:none;border:none;border-bottom:1px solid #2a2a2a;color:#fff;font-family:"Barlow Condensed";font-size:20px;font-weight:900;width:100%;outline:none;padding:2px 0;margin-bottom:2px}
-.trk-prev{font-size:9px;font-family:"Barlow";color:#333}
-.trk-up{color:#4cff91}
-.trk-dn{color:#ff5050}
-.trk-eq{color:#555}
-.trk-addwk{width:100%;padding:11px;border-radius:10px;background:#13131a;border:1px solid #1c1c26;color:#444;font-family:"Barlow Condensed";font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:16px}
-.trk-empty{text-align:center;padding:40px 20px;color:#333;font-family:"Barlow";font-size:12px;letter-spacing:1px;line-height:1.8}
 </style>
 </head>
 <body>
 <div id="hdr">
   <div id="hdr-in">
-    <div class="tagrow"><span class="tag" id="htag">7-Day Program</span><span class="sub">Age 14 · 122 lbs</span></div>
+    <div class="tagrow"><span class="tag" id="htag">7-Day Program</span><span class="sub">Age 14 &middot; 122 lbs</span></div>
     <h1>Height. Muscle. Strength. <span id="hacc">Lets Go.</span></h1>
   </div>
 </div>
 <div id="main">
-  <div id="navtabs">
-    <button class="nvtab on" onclick="showTab('workout')">&#128170; Workout</button>
-    <button class="nvtab" onclick="showTab('tracker')">&#128200; Progress</button>
-    <button class="nvtab" onclick="showTab('motivation')">&#128293; Motivation</button>
-  </div>
-  <div id="workout">
-    <div id="tabs"></div>
-    <div id="motbanner"></div>
-    <div id="daycard">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div><div class="dlbl" id="dday"></div><div class="dtitle" id="dtitle"></div><div class="dfocus" id="dfocus"></div></div>
-        <div class="dem" id="dem"></div>
-      </div>
+  <div id="tabs"></div>
+  <div id="daycard">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div class="dlbl" id="dday"></div><div class="dtitle" id="dtitle"></div><div class="dfocus" id="dfocus"></div></div>
+      <div class="dem" id="dem"></div>
     </div>
-    <div id="wcg">
-      <div class="wcc"><div class="wlbl" style="color:#FFD700">Warmup</div><div class="wname" id="wuname"></div><div class="wreps" id="wureps" style="color:#FFD700"></div><div class="wnote" id="wunote"></div></div>
-      <div class="wcc"><div class="wlbl" style="color:#00E5FF">Cardio</div><div class="wname" id="caname"></div><div class="wreps" id="careps" style="color:#00E5FF"></div><div class="wnote" id="canote"></div></div>
-    </div>
-    <div id="progbox"></div>
-    <div id="pullsection"><div class="shdr"><div class="slbl" id="pullslbl">Scapula + Pull-Up Work</div><div class="shint">Tap to expand</div></div><div class="exlist" id="pullpraclist"></div></div>
-    <div id="pushsection"><div class="shdr"><div class="slbl" id="pushslbl">Push-Up Board Work</div><div class="shint">Tap to expand</div></div><div class="exlist" id="pushlist"></div></div>
-    <div class="shdr"><div class="slbl">Main Workout</div><div class="shint">Tap to expand</div></div>
-    <div class="exlist" id="exlist"></div>
-    <div class="shdr" id="strhdr" style="display:none"><div class="slbl" id="strlbl">Stretches</div></div>
-    <div class="stretchgrid" id="strlist"></div>
-    <div id="cooldown"><span style="font-size:19px">&#x1F9CA;</span><div><div class="cdlbl">Cool Down</div><div class="cdtxt" id="cdtxt"></div></div></div>
-    <div id="footer"><span class="pulse">Log every rep &middot; Sleep 9-10 hrs &middot; Beat last week by 1 rep</span></div>
   </div>
-  <div id="tracker" style="display:none">
-    <div style="font-size:10px;letter-spacing:3px;color:#444;font-weight:700;text-transform:uppercase;margin-bottom:12px">Weekly Progress Log</div>
-    <button class="trk-addwk" onclick="addWeek()">+ Add This Week</button>
-    <div id="trkweeks"></div>
+
+  <!-- PRE-WORKOUT SECTION -->
+  <div id="preworkout-section"></div>
+
+  <div id="wcg">
+    <div class="wcc"><div class="wlbl" style="color:#FFD700">Warmup</div><div class="wname" id="wuname"></div><div class="wreps" id="wureps" style="color:#FFD700"></div><div class="wnote" id="wunote"></div></div>
+    <div class="wcc"><div class="wlbl" style="color:#00E5FF">Cardio</div><div class="wname" id="caname"></div><div class="wreps" id="careps" style="color:#00E5FF"></div><div class="wnote" id="canote"></div></div>
   </div>
-  <div id="motivation" style="display:none">
-    <div style="font-size:10px;letter-spacing:3px;color:#444;font-weight:700;text-transform:uppercase;margin-bottom:14px">Daily Fuel</div>
-    <div id="motfull"></div>
-  </div>
+  <div id="progbox"></div>
+  <div id="pullsection"><div class="shdr"><div class="slbl" id="pullslbl">Scapula + Pull-Up Work</div><div class="shint">Tap to expand</div></div><div class="exlist" id="pullpraclist"></div></div>
+  <div id="pushsection"><div class="shdr"><div class="slbl" id="pushslbl">Push-Up Work</div><div class="shint">Tap to expand</div></div><div class="exlist" id="pushlist"></div></div>
+  <div class="shdr"><div class="slbl">Main Workout</div><div class="shint">Tap to expand</div></div>
+  <div class="exlist" id="exlist"></div>
+  <div class="shdr" id="strhdr" style="display:none"><div class="slbl" id="strlbl">Stretches</div></div>
+  <div class="stretchgrid" id="strlist"></div>
+  <div id="cooldown"><span style="font-size:19px">&#129502;</span><div><div class="cdlbl">Cool Down</div><div class="cdtxt" id="cdtxt"></div></div></div>
+  <div id="footer"><span class="pulse">Form first &middot; Sleep 9-10 hrs &middot; Beat last week by 1 rep</span></div>
 </div>
 <script>
-function showTab(t){
-  ['workout','tracker','motivation'].forEach(function(id){
-    document.getElementById(id).style.display=id===t?'':'none';
-  });
-  document.querySelectorAll('.nvtab').forEach(function(n,i){
-    n.classList.toggle('on',['workout','tracker','motivation'][i]===t);
-  });
-  if(t==='tracker')renderTracker();
-  if(t==='motivation')renderMotFull();
-}
-
-var QUOTES=[
-  {icon:'&#128293;',q:'Every rep you do today is a rep nobody can take away from you.',s:"The work adds up. You just can't see it yet. Keep going."},
-  {icon:'&#128170;',q:"You don't have to be the strongest. You just have to show up.",s:'Showing up every day beats being talented but lazy every single time.'},
-  {icon:'&#128200;',q:"One more rep than last week. That's the whole game.",s:"You don't need a huge jump. Just be slightly better than yesterday."},
-  {icon:'&#129504;',q:'Your arms are tired but your mind quits first.',s:"When it burns and you want to stop -- that's the exact moment the muscle starts growing."},
-  {icon:'&#127942;',q:"Nobody starts this at 14. That's your advantage.",s:"You're building something most people won't start until they're 25. You're already ahead."},
-  {icon:'&#128548;',q:"The bar doesn't care how you feel today.",s:'Do it anyway. Bad workout days still build muscle. Skipping does nothing.'},
-  {icon:'&#128640;',q:"That one pull-up you got? That's the beginning.",s:'Every negative, every hang, every scapular pull is making the next one easier. It is coming.'},
-  {icon:'&#9889;',q:'Soreness means it worked.',s:'If your chest is sore after chest day you did it right. Rest, eat, sleep, come back stronger.'},
-  {icon:'&#129413;',q:'The version of you in 6 months is watching right now.',s:'Will he be proud of what you did today? Make sure the answer is yes.'},
-  {icon:'&#128161;',q:'Strength is just patience and reps.',s:"Nobody gets strong fast. They just never stopped. That's your advantage -- you started young."}
-];
-
 function hexRgb(c){var r=parseInt(c.slice(1,3),16),g=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);return r+','+g+','+b;}
 function ha(c,a){return'rgba('+hexRgb(c)+','+a+')';}
 
-function renderMotBanner(col){
-  var q=QUOTES[new Date().getDay()%QUOTES.length];
-  var el=document.getElementById('motbanner');
-  el.style.borderColor='rgba('+hexRgb(col)+',0.2)';
-  el.style.background='rgba('+hexRgb(col)+',0.04)';
-  el.innerHTML='<div class="motico">'+q.icon+'</div><div><div class="motday" style="color:'+col+'">Today\'s fuel</div><div class="motquote" style="color:'+col+'">'+q.q+'</div><div class="motsub">'+q.s+'</div></div>';
-}
-function renderMotFull(){
-  var cols=['#FF4D4D','#FF8C00','#FFD700','#00C853','#00B0FF','#7C4DFF','#F06292','#00E5FF','#FF4D4D','#00C853'];
-  var h='';
-  QUOTES.forEach(function(q,i){
-    var c=cols[i%cols.length];
-    h+='<div style="background:#13131a;border-radius:13px;padding:15px 16px;margin-bottom:10px;border:1px solid rgba('+hexRgb(c)+',0.18)"><div style="font-size:24px;margin-bottom:8px">'+q.icon+'</div><div style="font-size:14px;font-weight:800;color:'+c+';text-transform:uppercase;line-height:1.3;margin-bottom:6px">'+q.q+'</div><div style="font-size:11px;font-family:Barlow;color:#555;line-height:1.55">'+q.s+'</div></div>';
-  });
-  document.getElementById('motfull').innerHTML=h;
-}
-
-var TRK_KEYS=['Pull-Up Attempts','Floor Push-Ups','Dead Hang (sec)','Plank (sec)','Scapular Pulls','Chair Dips'];
-function loadWeeks(){try{return JSON.parse(localStorage.getItem('wklog')||'[]');}catch(e){return[];}}
-function saveWeeks(w){localStorage.setItem('wklog',JSON.stringify(w));}
-function addWeek(){
-  var weeks=loadWeeks();
-  var entry={week:weeks.length+1,date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),vals:{}};
-  TRK_KEYS.forEach(function(k){entry.vals[k]='';});
-  weeks.push(entry);saveWeeks(weeks);renderTracker();
-}
-function clearWeek(i){
-  var weeks=loadWeeks();weeks.splice(i,1);
-  for(var j=0;j<weeks.length;j++)weeks[j].week=j+1;
-  saveWeeks(weeks);renderTracker();
-}
-function updateVal(wi,key,val){var weeks=loadWeeks();if(weeks[wi])weeks[wi].vals[key]=val;saveWeeks(weeks);}
-function renderTracker(){
-  var weeks=loadWeeks(),el=document.getElementById('trkweeks');
-  if(!weeks.length){el.innerHTML='<div class="trk-empty">No weeks logged yet.<br><br>Hit "+ Add This Week" then fill in your numbers.<br><br>Green arrow = improved. That is the goal every week.</div>';return;}
-  var h='';
-  for(var i=weeks.length-1;i>=0;i--){
-    var w=weeks[i],prev=i>0?weeks[i-1]:null;
-    h+='<div class="trk-week"><div class="trk-wtitle"><span>Week '+w.week+' &middot; '+w.date+'</span><span class="trk-clr" onclick="clearWeek('+i+')">Remove</span></div><div class="trk-grid">';
-    TRK_KEYS.forEach(function(key){
-      var cur=w.vals[key]||'',prevVal=prev?prev.vals[key]:'',arrow='';
-      if(cur!==''&&prevVal!==''){var cn=parseFloat(cur),pn=parseFloat(prevVal);if(cn>pn)arrow='<span class="trk-up">&#9650; +'+Math.round((cn-pn)*10)/10+'</span>';else if(cn<pn)arrow='<span class="trk-dn">&#9660; '+Math.round((cn-pn)*10)/10+'</span>';else arrow='<span class="trk-eq">same</span>';}
-      h+='<div class="trk-item"><div class="trk-label">'+key+'</div><input class="trk-input" type="number" inputmode="numeric" placeholder="--" value="'+cur+'" onchange="updateVal('+i+',\''+key+'\',this.value)" />';
-      if(arrow)h+='<div class="trk-prev">'+arrow+(prevVal?' vs '+prevVal:'')+'</div>';
-      else if(prevVal)h+='<div class="trk-prev">Last: '+prevVal+'</div>';
-      h+='</div>';
-    });
-    h+='</div></div>';
-  }
-  el.innerHTML=h;
-}
-
 function bdg(t){
   if(!t)return'';
-  var m={board:'<span class="bdg bboard">Board</span>',weight:'<span class="bdg bweight">5lb</span>',pull:'<span class="bdg bpull">Pull-Up</span>',burnout:'<span class="bdg bburnout">Burnout</span>',cal:'<span class="bdg bcal">Cals</span>'};
+  var m={board:'<span class="bdg bboard">Board</span>',weight:'<span class="bdg bweight">5lb</span>',pull:'<span class="bdg bpull">Pull-Up</span>',burnout:'<span class="bdg bburnout">Burnout</span>'};
   return m[t]||'';
 }
 function mkList(arr,exp,pfx,col){
@@ -266,6 +170,65 @@ function mkPullProg(c){
   return'<div class="progbox" style="background:'+ha(c,.06)+';border:1px solid '+ha(c,.2)+'"><div class="progtitle" style="color:'+c+'">Pull-Up Journey -- tap your current level</div><div class="progrow">'+pills+'</div></div>';
 }
 
+/* PRE-WORKOUT ROUTINES per day */
+var PREWORKOUT=[
+  /* 0 - Chest Day */
+  {emoji:'&#9889;',title:'Pre-Workout Activation',sub:'Do this before ANYTHING else -- gets your chest, wrists, and shoulders ready',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. This wakes up your spine and neck so you stay loose during pressing movements.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Lubricates your shoulder joints before all the pressing.'},
+    {name:'Wrist Warm-Up',detail:'Put your palms together in front of your chest like praying. Push them down toward your waist until you feel a stretch in your wrists. Hold 10 seconds. Repeat 3 times. Critical before push-up and press work.'},
+    {name:'Shoulder Rotation',detail:'One arm at a time -- bring it across your body and pull it tight to your chest with your other arm. Hold 10 seconds each side, then swing your arms loosely. 2 rounds.'},
+    {name:'10 Slow Air Punches',detail:'Stand in a relaxed stance. Punch slowly forward alternating arms -- fully extending but not locking your elbows. Feel your chest and shoulder activate with each punch. 10 per arm.'}
+  ]},
+  /* 1 - Back + Core */
+  {emoji:'&#128293;',title:'Pre-Workout Activation',sub:'Activate your lats and core before any pulling or rowing movements',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. Wake up your spine before any back work.'},
+    {name:'Cat-Cow Stretch',detail:'Get on your hands and knees. Arch your back up toward the ceiling like a scared cat -- hold 3 seconds. Then let your belly drop toward the floor and look up -- hold 3 seconds. Do 10 slow cycles. This primes your entire spine.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Warms up the shoulder joint before rowing.'},
+    {name:'Lat Activation Reach',detail:'Stand with feet hip-width. Reach both arms as high overhead as you can -- stretch your lats. Then pull your elbows down hard to your sides like you\'re pulling a bar down. Do 10 slow reps. This teaches your lats to fire before rows and hangs.'},
+    {name:'Hip Circles',detail:'Hands on hips. Make 10 big slow circles one way then 10 the other way. Wakes up your hips and lower back before core work.'}
+  ]},
+  /* 2 - Grip + Strength */
+  {emoji:'&#129466;',title:'Pre-Workout Activation',sub:'Get your grip, forearms, and full body ready for compound strength work',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. Always start with the neck.'},
+    {name:'Wrist Warm-Up',detail:'Put your palms together in front of your chest. Push them down toward your waist until you feel a stretch. Hold 10 seconds. Repeat 3 times. Grip work is hard on wrists -- this is non-negotiable.'},
+    {name:'Forearm Stretch',detail:'Extend one arm straight out in front with your palm facing DOWN. Use your other hand to gently push your fingers toward the floor until you feel a stretch in your forearm. Hold 20 seconds each arm. Critical before farmer carries and hangs.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Warms up the shoulder joint.'},
+    {name:'Squat Hold',detail:'Stand with feet shoulder-width, go into a deep squat and hold the bottom position for 30 seconds. Just chill down there. Wakes up your hips and legs before the squat-to-press.'}
+  ]},
+  /* 3 - Shoulder + Arms */
+  {emoji:'&#9889;',title:'Pre-Workout Activation',sub:'Prime your shoulders, elbows, and wrists before any pressing or curling',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. Especially important before shoulder work.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Then make 10 tiny fast circles each way. This is your most important pre-workout move today.'},
+    {name:'Shoulder Pendulum',detail:'Lean forward slightly and let one arm hang completely loose. Swing it gently forward and back 10 times, then side to side 10 times, then in small circles. Switch arms. Lets your shoulder joint decompress and lubricate naturally.'},
+    {name:'Wrist Warm-Up',detail:'Put your palms together in front of your chest. Push them down toward your waist until you feel a stretch in your wrists. Hold 10 seconds. Repeat 3 times. Do this before every curl and press session.'},
+    {name:'Elbow Circles',detail:'Elbows bent at 90 degrees, palms up. Make 10 slow circles with your forearms -- rotating at the elbow joint only. Do both ways. Keeps your elbow joints healthy for all the curl and extension work ahead.'}
+  ]},
+  /* 4 - Power Day */
+  {emoji:'&#128640;',title:'Pre-Workout Activation',sub:'Full body wake-up -- today you\'re going hard so the warm-up matters extra',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. Always start with the neck.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Power day hits everything -- wake those shoulders up.'},
+    {name:'Hip Circles',detail:'Hands on hips. Make 10 big slow circles one way then 10 the other way. Primes your core and hips for the full body work ahead.'},
+    {name:'Leg Swings',detail:'Stand next to a wall and hold it lightly for balance. Swing one leg forward and back loosely 15 times. Then swing it side to side 15 times. Switch legs. Wakes up your hip flexors and glutes.'},
+    {name:'Thoracic Rotation',detail:'Sit cross-legged on the floor. Put both hands behind your head. Rotate your upper body left as far as you can, hold 2 seconds, then rotate right. Do 10 slow rotations each way. Opens up your spine and chest before power work.'}
+  ]},
+  /* 5 - Strength Day */
+  {emoji:'&#127947;',title:'Pre-Workout Activation',sub:'Get your full body primed for heavy compound strength work',steps:[
+    {name:'Neck Rolls',detail:'Slowly drop your chin to your chest. Roll your head in a big circle -- 5 times each way. Always start with the neck.'},
+    {name:'Hip Circles',detail:'Hands on hips. Make 10 big slow circles one way then 10 the other way. You\'re squatting and deadlifting today -- your hips need to be loose.'},
+    {name:'Leg Swings',detail:'Stand next to a wall and hold it lightly for balance. Swing one leg forward and back loosely 15 times. Then swing it side to side 15 times. Switch legs. Non-negotiable before any squat or Romanian deadlift work.'},
+    {name:'Arm Circles',detail:'Hold both arms straight out to your sides. Make big slow circles forward 10 times then backward 10 times. Primes your chest and shoulder for the pressing ahead.'},
+    {name:'Squat Hold',detail:'Stand with feet shoulder-width, go into a deep squat and hold the bottom position for 30 seconds. Just chill down there and let your hips open up. Then slowly stand. Do this twice before your squat-to-press sets.'}
+  ]},
+  /* 6 - Rest Day */
+  {emoji:'&#128524;',title:'Gentle Activation',sub:'No intensity today -- just wake the body up and keep things loose',steps:[
+    {name:'Neck Rolls',detail:'Slowly and gently roll your head in big circles -- 5 times each way. Do this extra slow on rest day. Your neck muscles have worked all week.'},
+    {name:'Cat-Cow Stretch',detail:'Get on your hands and knees. Arch your back up like a scared cat -- hold 3 seconds. Then let your belly drop toward the floor and look up -- hold 3 seconds. Do 15 slow cycles. This is the best spinal recovery move there is.'},
+    {name:'Hip Circles',detail:'Hands on hips. Make 10 big slow circles one way then 10 the other way. Everything is just light and easy today.'},
+    {name:'Full Body Shake-Out',detail:'Stand up and literally shake your arms, then your legs, then your whole body loosely for 30 seconds. Sounds silly. Works great. Releases tension you have built up in your muscles all week.'}
+  ]}
+];
+
 var HS=[
   {name:'Dead Hang',time:'3 sets - 30 sec',how:'Jump and hang from a bar. Go completely loose. Let gravity pull you down. Best thing you can do for your spine and height every single day.'},
   {name:'Cobra',time:'3 sets - 30 sec',how:'Lie face down, hands under shoulders. Press your chest up off the floor and look up. Keep hips on the ground. Hold and breathe.'},
@@ -282,26 +245,27 @@ var PS=[
 ];
 
 var PULL_PRACTICE={
-  1:{col:'#FF8C00',banner:'SCAPULA + PULL-UP WORK -- Back Day',sub:'Scapular pulls are the main focus every single session',ex:[
+  1:{col:'#FF8C00',banner:'SCAPULA + PULL-UP WORK -- Back + Core Day',sub:'Scapular pulls are the main focus every single session',ex:[
     {name:'Dead Hang Hold',sets:'4',reps:'25-35 sec',badge:'pull',note:'Hang completely loose -- let gravity work',how:'Jump to the bar and hang with arms fully straight. Shoulders relaxed -- let them rise naturally. Do not pull anything. Just hang loose and breathe. Decompresses your spine for height and builds grip. 4 sets, 30 sec rest between.'},
     {name:'Scapular Pull',sets:'5',reps:'8-10',badge:'pull',note:'MAIN MOVE -- shoulder blades DOWN without bending elbows',how:'Hang from the bar with arms completely straight. Without bending your elbows at all, squeeze your shoulder blades DOWN and together -- like putting them in your back pockets. Your body will rise about an inch. Hold 1 second. Let them slide back up slowly. That is 1 rep. This is the foundation of every pull-up. 5 sets of 8-10.'},
     {name:'Negative Pull-Up',sets:'3',reps:'4-5',badge:'pull',note:'Jump to top -- lower in 6 full seconds -- do not drop',how:'Jump up so your chin is above the bar. Lower yourself as slowly as you can -- aim for 6 full seconds on the way down. Do not just drop. Fight gravity every inch. Use your knees to reset. Single most effective way to build pull-up strength. 3 sets only.'},
-    {name:'Pull-Up Attempt',sets:'1',reps:'Try for 1',badge:'pull',note:'ONE attempt when fresh -- do not grind it',how:'When you feel fresh after your scapular and negative work, try 1 pull-up. If you get it -- write it in the tracker. That is a huge win. If not, do a negative instead. Never attempt more than your body is ready for.'}
+    {name:'Hanging Knee Raise',sets:'3',reps:'8-10',badge:'pull',note:'Pull knees to chest while hanging -- core and grip together',how:'Hang from the bar with straight arms. Pull both knees up toward your chest slowly. Hold 1 second at the top. Lower slowly. Do not swing. Trains your core while keeping your shoulders in the hang position.'},
+    {name:'Pull-Up Attempt',sets:'1',reps:'Try for 1',badge:'pull',note:'ONE attempt when fresh -- do not grind it',how:'When you feel fresh after your scapular and negative work, try 1 pull-up. If you get it -- write it down. That is a huge win. If not, do a negative instead. Never attempt more than your body is ready for.'}
   ]},
-  2:{col:'#FFD700',banner:'SCAPULA WORK -- Core Day',sub:'Core and scapular strength train together perfectly',ex:[
-    {name:'Dead Hang Hold',sets:'4',reps:'25-35 sec',badge:'pull',note:'Try to beat last session by 5 seconds',how:'Jump and hang completely loose. Arms fully straight. Beat your last hang time by 5 seconds. Write it in the tracker. Every hang decompresses your spine -- good for height.'},
-    {name:'Scapular Pull',sets:'5',reps:'8-10',badge:'pull',note:'MAIN MOVE -- shoulder blades DOWN -- no elbow bend',how:'Hang from the bar. Without bending your elbows at all, squeeze your shoulder blades DOWN and together. Body rises an inch. Hold 1 second. Let go slowly. 5 sets. Feel your lats fire every single rep.'},
-    {name:'Hanging Knee Raise',sets:'3',reps:'8-10',badge:'pull',note:'Pull knees to chest while hanging -- core and grip together',how:'Hang from the bar with straight arms. Pull both knees up toward your chest slowly. Hold 1 second at the top. Lower slowly. Do not swing. Trains your core while keeping your shoulders in the hang position.'}
+  2:{col:'#3DDC97',banner:'GRIP + SCAPULA WORK -- Grip + Strength Day',sub:'Heavy grip and hang work paired with your compound lifts',ex:[
+    {name:'Dead Hang Hold',sets:'5',reps:'25-35 sec',badge:'pull',note:'Main grip move today -- beat last session by 5 seconds',how:'Jump and hang completely loose. Arms fully straight. Try to beat your last hang time by 5 seconds. 5 sets with 30 sec rest. This is a grip and strength day, so hangs matter a lot here.'},
+    {name:'Scapular Pull',sets:'4',reps:'10-12',badge:'pull',note:'MAIN MOVE -- shoulder blades DOWN -- no elbow bend',how:'Hang from the bar. Without bending your elbows at all, squeeze your shoulder blades DOWN and together. Body rises an inch. Hold 1 second. Let go slowly. 4 sets of 10-12. Feel your lats fire every rep.'},
+    {name:'Towel Grip Hang',sets:'3',reps:'15-20 sec',badge:'pull',note:'Drape a towel over the bar and grip that instead -- pure grip',how:'Drape a thick towel over the pull-up bar so it hangs down both sides. Grip the towel ends instead of the bar and hang. This is much harder on your grip than the bar itself. Hold 15-20 seconds. 3 sets. Excellent forearm and grip builder.'}
   ]},
-  4:{col:'#00B0FF',banner:'SCAPULA WORK -- Light Day',sub:'Mid-week -- lighter today to protect your elbow joints',ex:[
+  3:{col:'#00C853',banner:'SCAPULA WORK -- Shoulder + Arms Day',sub:'Lighter today -- protect your elbow joints',ex:[
     {name:'Dead Hang Hold',sets:'3',reps:'20-25 sec',badge:'pull',note:'Easy today -- do not push your max',how:'3 easy hang sets. Arms completely loose. Do not push for time today. Your elbows and shoulders have already worked hard this week. Just keeping the habit alive.'},
     {name:'Scapular Pull',sets:'3',reps:'6-8',badge:'pull',note:'Light scapular work -- feel the movement, no strain',how:'Hang from the bar. Gently squeeze shoulder blades down without bending elbows. Easy and controlled. 3 sets. The goal today is just keeping the muscle memory sharp.'}
   ]},
-  5:{col:'#7C4DFF',banner:'SCAPULA + PULL-UP TEST -- Power Day',sub:'Max effort scapular work then test your pull-up',ex:[
-    {name:'Dead Hang Max Hold',sets:'2',reps:'Max time',badge:'pull',note:'Go until you drop -- log your time every week',how:'Hang as long as humanly possible. Completely loose. Write your time in the tracker every Power Day. Watch it grow over weeks.'},
-    {name:'Scapular Pull',sets:'5',reps:'10-12',badge:'pull',note:'MAIN MOVE -- best scapular set of the week',how:'Hang from the bar. Squeeze shoulder blades DOWN and together without bending elbows. Body rises an inch. Hold 1 second. 5 sets of 10-12. By the end your lats should be pumped. Log your sets.'},
+  4:{col:'#7C4DFF',banner:'SCAPULA + PULL-UP TEST -- Power Day',sub:'Max effort scapular work then test your pull-up',ex:[
+    {name:'Dead Hang Max Hold',sets:'2',reps:'Max time',badge:'pull',note:'Go until you drop -- track your time mentally and try to beat it',how:'Hang as long as humanly possible. Completely loose. Try to beat your time from last Power Day. Watch it grow over weeks.'},
+    {name:'Scapular Pull',sets:'5',reps:'10-12',badge:'pull',note:'MAIN MOVE -- best scapular set of the week',how:'Hang from the bar. Squeeze shoulder blades DOWN and together without bending elbows. Body rises an inch. Hold 1 second. 5 sets of 10-12. By the end your lats should be pumped.'},
     {name:'Negative Pull-Up',sets:'3',reps:'4-5',badge:'pull',note:'6 sec lower -- maximum slowness -- the best strength builder',how:'Jump so your chin is above the bar. Lower in 6 full seconds. Every inch counts. Do not drop. 3 sets. These are the most valuable reps in your entire program right now.'},
-    {name:'Pull-Up Max Attempt',sets:'1',reps:'Try for 1-2',badge:'pull',note:'Best attempt of the week -- log it even if it is 0',how:'After your scapular and negative work, give your best pull-up attempt. Try for 1 or 2 clean reps. If you get one -- incredible, log it. If not, do a negative and log that. Either way you are winning.'}
+    {name:'Pull-Up Max Attempt',sets:'1',reps:'Try for 1-2',badge:'pull',note:'Best attempt of the week',how:'After your scapular and negative work, give your best pull-up attempt. Try for 1 or 2 clean reps. If you get one -- incredible. If not, do a negative instead. Either way you are winning.'}
   ]},
   6:{col:'#F06292',banner:'SCAPULA + HANG WORK -- Rest Day',sub:'Easy hangs and light scapular work -- great for height too',ex:[
     {name:'Dead Hang Hold',sets:'5',reps:'20-25 sec',badge:'pull',note:'5 easy sets -- spine decompression -- do every rest day',how:'Jump and hang completely loose. 5 easy sets with 30 sec rest. No pulling at all. Just hanging. Best thing you can do for your height on a rest day.'},
@@ -310,27 +274,34 @@ var PULL_PRACTICE={
 };
 
 var PUSH_DAILY={
-  0:{col:'#FF4D4D',banner:'PUSH DAY -- Board + Floor',sub:'Main chest day -- wide grip and floor, slow and controlled',ex:[
-    {name:'Standard Floor Push-Up',sets:'4',reps:'15-20',badge:'',note:'SLOW -- 3 sec down -- log your max every week',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 full seconds. Press up. Go until you cannot do another full rep. Write the number in the tracker and beat it every week.'},
-    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles on the board -- 3 sec down',how:'Hands on the WIDE handles of the board. Lower in 3 full seconds, elbows flaring slightly out. Press back up. 4 sets of 12-15. This is your main board grip now -- focus all your effort on getting stronger here.'},
-    {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Hands wider than shoulders -- 3 sec down',how:'Hands wider than shoulder-width on the floor. Lower in 3 seconds. Press up. Hits your outer chest. Log this number in the tracker too.'}
+  0:{col:'#FF4D4D',banner:'DAILY PUSH-UPS + BOARD WORK',sub:'10 every day, plus your main board work since this is Chest Day',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line from head to heels. Lower in 3 seconds. Press up. 10 clean reps. Drop to knees if you need to in order to keep good form -- form matters more than finishing standard.'},
+    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles on the board -- 3 sec down',how:'Hands on the WIDE handles of the board. Lower in 3 full seconds, elbows flaring slightly out. Press back up. 4 sets of 12-15. This is your main board grip -- focus all your effort on getting stronger here.'},
+    {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Hands wider than shoulders -- 3 sec down',how:'Hands wider than shoulder-width on the floor. Lower in 3 seconds. Press up. Hits your outer chest. 4 sets.'}
   ]},
-  3:{col:'#00C853',banner:'PUSH DAY -- Board + Floor',sub:'Second push day -- same simple combo, same intensity',ex:[
-    {name:'Standard Floor Push-Up',sets:'4',reps:'15-20',badge:'',note:'SLOW -- 3 sec down -- beat last week by 1 rep',how:'Hands shoulder-width on the floor. Lower in 3 seconds. Press up. Go to failure. Write your number in the tracker. Try to beat last week by even 1 rep.'},
-    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles -- slow and controlled',how:'Hands on the WIDE handles of the board. Lower in 3 seconds, elbows flaring slightly. Press up. 4 sets of 12-15. Same as Chest Day -- focus on getting a rep or two stronger each week.'},
+  1:{col:'#FF8C00',banner:'DAILY PUSH-UPS',sub:'10 today -- light, just keeping the habit alive on a pull day',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 clean reps. Drop to knees if needed to keep good form.'}
+  ]},
+  2:{col:'#3DDC97',banner:'DAILY PUSH-UPS',sub:'10 today -- this is a grip and strength day, not a push day',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 clean reps. Drop to knees if needed to keep good form.'}
+  ]},
+  3:{col:'#00C853',banner:'DAILY PUSH-UPS + BOARD WORK',sub:'10 every day, plus your main board work since this is a push day',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 clean reps. Drop to knees if needed to keep good form.'},
+    {name:'Wide Grip Push-Up — Board',sets:'4',reps:'12-15',badge:'board',note:'SLOW -- Wide handles -- slow and controlled',how:'Hands on the WIDE handles of the board. Lower in 3 seconds, elbows flaring slightly. Press up. 4 sets of 12-15. Focus on getting a rep or two stronger each week.'},
     {name:'Wide Push-Up on Floor',sets:'4',reps:'12-15',badge:'',note:'SLOW -- Wide hands -- 3 sec down -- outer chest',how:'Hands wider than shoulder-width on the floor. 3 seconds down every rep. Outer chest focus. 4 sets.'}
   ]},
-  5:{col:'#7C4DFF',banner:'POWER PUSH DAY -- Max Test',sub:'Same two movements -- test your max numbers and log them',ex:[
-    {name:'Standard Floor Push-Up Max Test',sets:'3',reps:'Max -- log every rep',badge:'',note:'Most important number -- log it in Progress tab',how:'Hands shoulder-width on the floor. Go to complete failure every set. Write every number in the tracker. This is your main push-up score. Watch it grow every week.'},
-    {name:'Wide Grip Push-Up Max — Board',sets:'3',reps:'Max',badge:'board',note:'Wide handles -- go to failure -- log it',how:'Hands on the WIDE handles. Go to complete failure each set. Write your number in the tracker every Power Day and try to beat it.'},
-    {name:'Wide Push-Up Max',sets:'2',reps:'Max reps',badge:'',note:'Wide floor -- go to failure -- log it',how:'Hands wider than shoulder-width on the floor. Go to failure. Write your number in the tracker every Power Day.'}
+  4:{col:'#7C4DFF',banner:'DAILY PUSH-UPS + MAX TEST',sub:'10 standard, then test your max numbers and remember them',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 clean reps first, before anything else today.'},
+    {name:'Standard Floor Push-Up Max Test',sets:'3',reps:'Max -- remember your numbers',badge:'',note:'Most important number -- try to beat last Power Day',how:'After your 10 standard reps, rest a minute then go for max. Hands shoulder-width. Go to complete failure every set. This is your main push-up score. Watch it grow every week.'},
+    {name:'Wide Grip Push-Up Max — Board',sets:'3',reps:'Max',badge:'board',note:'Wide handles -- go to failure',how:'Hands on the WIDE handles. Go to complete failure each set. Try to beat your number from last Power Day.'}
   ]},
-  1:{col:'#FF8C00',banner:'LIGHT PUSH -- Back Day maintenance',sub:'Easy reps only -- chest stays fresh for the next push day',ex:[
-    {name:'Standard Floor Push-Up',sets:'2',reps:'10 slow',badge:'',note:'SLOW -- 3 sec down, 2 sec up -- easy only',how:'10 easy floor push-ups. 3 seconds down, 2 seconds up. Stop at 10 even if you could do more. Just keeping muscle memory alive.'},
-    {name:'Wide Grip Push-Up — Board',sets:'2',reps:'8 slow',badge:'board',note:'SLOW -- Wide handles -- extremely slow -- zero effort',how:'Hands on the WIDE handles. 8 reps at a crawl. 4 seconds down, hold 1, 3 seconds up. No effort. Just keeping the habit alive on a back day.'}
+  5:{col:'#00B0FF',banner:'DAILY PUSH-UPS',sub:'10 today -- this is a full strength day, push-ups are just the warm-up habit',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 clean reps. Drop to knees if needed to keep good form.'}
+  ]},
+  6:{col:'#F06292',banner:'DAILY PUSH-UPS',sub:'10 today -- even on rest day, keep the habit alive',ex:[
+    {name:'Standard Floor Push-Up',sets:'1',reps:'10',badge:'',note:'Every day, no matter what, even rest day -- good form over speed',how:'Hands shoulder-width on the floor. Body in a straight line. Lower in 3 seconds. Press up. 10 easy clean reps. This is light -- just keeping the habit alive on rest day.'}
   ]}
 };
-
 
 var DAYS=[
   {day:'Chest Day',label:'CHEST + SHOULDERS',emoji:'&#128170;',color:'#FF4D4D',focus:'Push Day - Board + Floor - 5lb Muscle Building',hasPullPrac:false,
@@ -338,103 +309,127 @@ var DAYS=[
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up to hip height -- arms pumping'},
    cooldown:'5 min easy walk + doorway chest stretch + wrist circles',pushStretches:true,
    exercises:[
-    {name:'5lb Chest Fly',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- full chest stretch every rep',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights above chest. Lower both arms wide like wings in 4 full seconds until elbows nearly touch the floor. Bring back together slowly. 4 sets.'},
-    {name:'5lb Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Floor press -- 3 sec down, squeeze at top',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights at chest height. Lower in 3 seconds. Press straight up until arms lock. Squeeze your chest hard at the top. 4 sets.'},
+    {name:'Jumping Jacks',sets:'3',reps:'30 sec',badge:'',note:'Extra cardio burst -- full range, steady pace',how:'Stand with feet together, arms at sides. Jump feet out wide while raising both arms overhead at the same time. Jump back to start. Keep a steady rhythm for 30 seconds. 3 sets with 20 sec rest between. Gets your heart rate up before the heavy lifting starts.'},
+    {name:'5lb Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Biggest chest move -- do this first while fresh',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights at chest height. Lower in 3 seconds. Press straight up until arms lock. Squeeze your chest hard at the top. 4 sets.'},
     {name:'5lb Incline Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Lean back against a wall or incline -- upper chest',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on a slight incline or lean your back against a stack of pillows so your torso is at an angle. Press both weights up and slightly back over your face. Lower in 3 seconds. Hits the upper chest differently than a flat press. 4 sets.'},
+    {name:'5lb Chest Fly',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- full chest stretch every rep',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights above chest. Lower both arms wide like wings in 4 full seconds until elbows nearly touch the floor. Bring back together slowly. 4 sets.'},
     {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Press overhead -- 3 sec down -- core tight',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight -- no arching your back. 4 sets.'},
     {name:'5lb Lateral Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- shoulder width builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides. Raise both arms out to shoulder height. Lower very slowly in 4 full seconds. By rep 15 this will burn. 4 sets.'},
     {name:'5lb Front Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight arms -- 3 sec down -- no swinging',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights on thighs palms down. Raise both arms forward to eye level. Arms stay straight. Lower in 3 seconds. No swinging. 4 sets.'},
     {name:'5lb Tricep Overhead Extension',sets:'3',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold one 5lb weight with both hands above your head. Lower behind your head bending only at the elbows in 3 seconds. Press back up. Upper arms stay still. 3 sets.'},
-    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core iron tight -- add 5 sec every week -- log your time',how:'Hands on floor arms straight. Body perfectly straight from head to heels. Squeeze everything. 45-60 seconds. Add 5 seconds every week. Write your time in the tracker.'},
-    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. This is just basic form practice -- 1 easy set, no rush.'},
     {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
-    {name:'5lb Lateral Raise Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- raise until your arms give out -- log it',how:'Same as your regular lateral raise but do not stop at 20. Keep going until you physically cannot lift your arms to shoulder height. Write your total. Beat it next Chest Day.'}
+    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core iron tight -- add 5 sec every week',how:'Hands on floor arms straight. Body perfectly straight from head to heels. Squeeze everything. 45-60 seconds. Add 5 seconds every week.'},
+    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. This is just basic form practice -- 1 easy set, no rush.'},
+    {name:'5lb Lateral Raise Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- raise until your arms give out',how:'Same as your regular lateral raise but do not stop at 20. Keep going until you physically cannot lift your arms to shoulder height. Beat it next Chest Day.'}
   ]},
-  {day:'Back Day',label:'BACK + SCAPULA',emoji:'&#128293;',color:'#FF8C00',focus:'Scapula Work - Full Back - 5lb Biceps',hasPullPrac:true,
+  {day:'Back + Core',label:'BACK + CORE',emoji:'&#128293;',color:'#FF8C00',focus:'Scapula Work - Full Back - Full Core - 5lb Biceps',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Try double-unders if ready'},
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up fast -- arms pumping the whole time'},
    cooldown:'5 min easy walk + bicep stretch + lat stretch',pushStretches:false,
    exercises:[
-    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main back builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to your hips. Squeeze shoulder blades hard at the top. Lower in 3 full seconds. 4 sets.'},
+    {name:'High Knees',sets:'3',reps:'30 sec',badge:'',note:'Extra cardio burst -- drive knees up, arms pumping',how:'Run in place driving your knees up to hip height as fast as you can control. Pump your arms. 30 seconds on, 20 seconds rest. 3 sets. Gets your heart rate up before back and core work.'},
+    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main back builder -- do this first while fresh',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to your hips. Squeeze shoulder blades hard at the top. Lower in 3 full seconds. 4 sets.'},
     {name:'5lb Single-Arm Row',sets:'4',reps:'10 each side',badge:'weight',note:'SLOW -- Drive elbow past hip -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. One hand on a chair. Pull one elbow straight up past your hip. Squeeze 1 second at top. Lower in 3 seconds. 10 each side. 4 sets.'},
-    {name:'5lb Pullover',sets:'3',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight overhead — lats and back',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back. Hold one 5lb weight with both hands straight above your chest. Keeping arms slightly bent, lower the weight back over your head toward the floor in 3 seconds. Bring it back up squeezing your back and lats. 3 sets.'},
+    {name:'5lb Pullover',sets:'3',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight overhead -- lats and back',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back. Hold one 5lb weight with both hands straight above your chest. Keeping arms slightly bent, lower the weight back over your head toward the floor in 3 seconds. Bring it back up squeezing your back and lats. 3 sets.'},
+    {name:'5lb Shrug',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight up -- hold 1 sec -- upper trap builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold weights at sides. Shrug straight up toward your ears. Hold 1 second at top. Lower slowly. Builds the muscles connecting your neck and upper back. 4 sets.'},
     {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
     {name:'5lb Hammer Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Thumbs up -- 4 sec down -- forearms and biceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Thumbs pointing up. Curl up, squeeze at top, lower in 4 seconds. Builds forearms for grip strength. 4 sets.'},
-    {name:'5lb Shrug',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight up -- hold 1 sec -- upper trap builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold weights at sides. Shrug straight up toward your ears. Hold 1 second at top. Lower slowly. Builds the muscles connecting your neck and upper back. 4 sets.'},
-    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core tight -- add 5 sec every week -- log your time',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Write your time in the tracker every week.'},
-    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
-    {name:'5lb Bicep Curl Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- curl until nothing works -- log it',how:'Curl both weights as many times as possible with full range. When you cannot do full reps do partial reps halfway up. Keep going until nothing moves. Write the number.'}
-  ]},
-  {day:'Core Day',label:'CORE + STABILITY',emoji:'&#128297;',color:'#FFD700',focus:'Full Core - Scapula Work - No Equipment',hasPullPrac:true,
-   warmup:{name:'Jump Rope',reps:'400 jumps',note:'Steady pace -- get your core warm'},
-   cardio:{name:'Jumping Jacks',reps:'3 x 40 sec',note:'Full range -- arms all the way overhead every rep'},
-   cooldown:'5 min easy walk + lying spinal twist both sides',pushStretches:false,
-   exercises:[
-    {name:'Plank Hold',sets:'5',reps:'45-60 sec',badge:'',note:'5 sets today -- main core move -- log your best time',how:'Hands on floor arms straight. Body perfectly straight. Squeeze core, glutes, and legs all at once. 45-60 seconds. Add 5 seconds every week. Write your time in the tracker.'},
+    {name:'Plank Hold',sets:'5',reps:'45-60 sec',badge:'',note:'5 sets today -- main core move -- log your best time',how:'Hands on floor arms straight. Body perfectly straight. Squeeze core, glutes, and legs all at once. 45-60 seconds. Add 5 seconds every week.'},
     {name:'Side Plank',sets:'3',reps:'30-40 sec each side',badge:'',note:'One arm -- hips up -- obliques working hard',how:'Lie on your side. Prop up on one hand or elbow. Body in a straight line from head to feet. Hold without letting hips drop. 30-40 seconds each side.'},
     {name:'Hollow Body Hold',sets:'4',reps:'20-30 sec',badge:'',note:'Arms overhead, legs up, lower back FLAT on floor',how:'Lie on your back. Press lower back INTO the floor with zero gap. Raise both arms overhead and both legs off the floor at the same time. Hold. Bend your knees if needed. This is the exact core position needed at the top of a pull-up.'},
     {name:'Dead Bug',sets:'3',reps:'8 each side',badge:'',note:'Opposite arm and leg -- lower back stays flat always',how:'Lie on your back, arms straight up, knees bent at 90 degrees in the air. Lower right arm overhead and left leg toward the floor simultaneously without letting your lower back lift. Switch sides. Slow and controlled every rep.'},
-    {name:'Mountain Climbers',sets:'4',reps:'35 sec',badge:'',note:'Hips LOW -- drive knees as fast as possible',how:'Plank on your hands. Drive one knee toward chest then quickly switch. As fast as possible for 35 seconds. Hips stay low. No bouncing. 20 sec rest between sets.'},
     {name:'5lb Weighted Crunch',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Hold weight at chest -- 3 sec up, 2 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back knees bent. Hold one 5lb weight at chest. Curl your upper back off the floor in 3 seconds. Hold 1 second at top. Lower in 2 seconds. Do not yank your neck. 4 sets.'},
     {name:'5lb Side Bend',sets:'3',reps:'15 each side',badge:'weight',note:'SLOW -- One weight at your side -- bend and squeeze obliques',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Stand holding one 5lb weight in one hand at your side. Bend sideways toward the weight then squeeze your obliques to pull yourself back up straight. Lower in 3 seconds. 15 reps then switch the weight to your other hand and do the other side.'},
     {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
-    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
-    {name:'Plank Burnout',sets:'1',reps:'Max hold to failure',badge:'burnout',note:'Final hold -- go until you collapse -- log your time',how:'Get into plank and hold as long as humanly possible. When your hips start dropping you are done. Write your time in the tracker. This is your weekly core benchmark.'}
+    {name:'Plank Burnout',sets:'1',reps:'Max hold to failure',badge:'burnout',note:'Final hold -- go until you collapse',how:'Get into plank and hold as long as humanly possible. When your hips start dropping you are done. This is your weekly core benchmark.'},
+    {name:'5lb Bicep Curl Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- curl until nothing works',how:'Curl both weights as many times as possible with full range. When you cannot do full reps do partial reps halfway up. Keep going until nothing moves.'}
   ]},
-  {day:'Shoulder Day',label:'SHOULDERS + PUSH',emoji:'&#9889;',color:'#00C853',focus:'Push Day - Full Shoulders - 5lb Muscle Building',hasPullPrac:false,
+  {day:'Grip + Strength',label:'GRIP + STRENGTH',emoji:'&#129466;',color:'#3DDC97',focus:'Grip Strength - Hang Work - 5lb Compound Muscle Building',hasPullPrac:true,
+   warmup:{name:'Jump Rope',reps:'500 jumps',note:'Steady pace -- warm the whole body up'},
+   cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up -- arms pumping'},
+   cooldown:'5 min easy walk + forearm stretch + wrist circles',pushStretches:false,
+   exercises:[
+    {name:'Jumping Jacks',sets:'3',reps:'30 sec',badge:'',note:'Extra cardio burst -- full range, steady pace',how:'Stand with feet together, arms at sides. Jump feet out wide while raising both arms overhead at the same time. Jump back to start. Keep a steady rhythm for 30 seconds. 3 sets with 20 sec rest between. Gets your heart and grip ready for the work ahead.'},
+    {name:'5lb Squat to Press',sets:'4',reps:'15',badge:'weight',note:'SLOW -- Biggest move today -- do this first while fresh',how:'SLOW AND CONTROLLED -- 3 seconds down on the squat, pause, controlled press. Weights at shoulder height. Squat down slowly. As you drive up to standing press both weights overhead at the same time. Lower weights back to shoulders as you squat again. One of the best full-body strength builders there is. 4 sets.'},
+    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main back and grip builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to your hips. Squeeze shoulder blades hard at the top. Lower in 3 full seconds. 4 sets. Heavy rows build serious grip strength too.'},
+    {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Press overhead -- 3 sec down -- core tight',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight -- no arching your back. 4 sets.'},
+    {name:'5lb Farmer Carry Hold',sets:'3',reps:'30-40 sec',badge:'weight',note:'Hold both weights at your sides -- just stand and grip',how:'Hold one 5lb weight in each hand down at your sides. Stand tall with shoulders back and just hold for 30-40 seconds. Do not let the weights swing. This builds raw grip endurance which carries directly into longer pull-up holds and hangs.'},
+    {name:'5lb Hammer Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Thumbs up -- 4 sec down -- forearms and biceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Thumbs pointing up. Curl up, squeeze at top, lower in 4 seconds. Builds your forearms for grip strength. 4 sets.'},
+    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
+    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core stability supports every grip and hang exercise',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds.'},
+    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
+    {name:'5lb Farmer Carry Burnout',sets:'1',reps:'Max time',badge:'burnout',note:'Final hold -- grip until you have to drop the weights',how:'Same as your farmer carry. Hold both weights at your sides and see how long you can hold before your grip gives out. This is your weekly grip benchmark.'}
+  ]},
+  {day:'Shoulder + Arms',label:'SHOULDERS + ARMS',emoji:'&#9889;',color:'#00C853',focus:'Push Day - Full Shoulders - Full Arms - 5lb Muscle Building',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'500 jumps',note:'Alternate feet every 50 jumps'},
    cardio:{name:'High Knees',reps:'3 x 30 sec',note:'30 sec fast then 30 sec walk -- repeat 3 times'},
-   cooldown:'5 min easy walk + shoulder and chest stretch',pushStretches:true,
+   cooldown:'5 min easy walk + shoulder and chest stretch + wrist circles',pushStretches:true,
    exercises:[
-    {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main shoulder builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight. 4 sets.'},
+    {name:'High Knees',sets:'3',reps:'30 sec',badge:'',note:'Extra cardio burst -- drive knees up, arms pumping',how:'Run in place driving your knees up to hip height as fast as you can control. Pump your arms. 30 seconds on, 20 seconds rest. 3 sets. Gets your heart rate up before shoulder and arm work.'},
+    {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main shoulder builder -- do this first while fresh',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight. 4 sets.'},
+    {name:'5lb Arnold Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Rotate palms as you press -- all 3 shoulder heads',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms facing YOU. As you press overhead rotate wrists so palms face FORWARD at the top. Reverse on the way down. Builds all three parts of your shoulder. 4 sets.'},
     {name:'5lb Lateral Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- shoulder width',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides. Raise both arms out to shoulder height. Lower in 4 full seconds. By rep 15 they should be burning. 4 sets.'},
     {name:'5lb Front Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Straight arms -- 3 sec down -- no swinging',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights on thighs palms down. Raise both arms forward to eye level. Lower in 3 seconds. No swinging. 4 sets.'},
-    {name:'5lb Arnold Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Rotate palms as you press -- all 3 shoulder heads',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms facing YOU. As you press overhead rotate wrists so palms face FORWARD at the top. Reverse on the way down. Builds all three parts of your shoulder. 4 sets.'},
     {name:'5lb Bent-Over Rear Delt Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Hinge forward -- raise arms wide -- rear shoulders',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward at your waist, weights hanging, palms facing each other. Raise both arms out wide to the sides like wings up to shoulder height. Squeeze your shoulder blades at the top. Lower in 3 seconds. 4 sets.'},
-    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core and shoulder stability -- hold strong',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Shoulder stability directly helps your push-up strength.'},
-    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
-    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
-    {name:'5lb Shoulder Press Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- press until your arms give out -- log it',how:'Same as your regular shoulder press. Go until you literally cannot press the weights overhead anymore. Write your total reps in the tracker.'}
-  ]},
-  {day:'Arms Day',label:'BACK + ARMS',emoji:'&#127754;',color:'#00B0FF',focus:'5lb Arms - Muscle Building',hasPullPrac:true,
-   warmup:{name:'Jump Rope',reps:'500 jumps',note:'Focus on wrist rotation -- relax your arms'},
-   cardio:{name:'Jumping Jacks',reps:'3 x 40 sec',note:'Full range -- steady rhythm -- shake out arms between sets'},
-   cooldown:'5 min easy walk + full arm and back stretch + wrist circles',pushStretches:false,
-   exercises:[
-    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both arms -- 3 sec down -- squeeze at top',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to hips. Squeeze shoulder blades hard. Lower in 3 seconds. 4 sets.'},
     {name:'5lb Concentration Curl',sets:'4',reps:'10 each arm',badge:'weight',note:'SLOW -- Elbow on thigh -- 4 sec down -- zero cheating',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on chair edge. Brace elbow on inside of thigh. Curl to your shoulder. Squeeze hard at top. Lower in 4 full seconds. 10 each side. 4 sets.'},
+    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
     {name:'5lb Tricep Kickback',sets:'4',reps:'15 each arm',badge:'weight',note:'SLOW -- Hinge forward -- extend arm fully back -- triceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward at the waist holding one 5lb weight. Tuck your elbow to your side at 90 degrees then straighten your arm back fully. Squeeze 1 second. Bring back in 3 seconds. Do both arms. 4 sets.'},
     {name:'5lb Tricep Overhead Extension',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both hands on one weight -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hold one 5lb weight with both hands above your head. Lower behind your head bending only at the elbows in 3 seconds. Press back up. Upper arms stay still. 4 sets.'},
-    {name:'5lb Hammer Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Thumbs up -- 4 sec down -- forearms and biceps',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Thumbs pointing up. Curl up, squeeze at top, lower in 4 seconds. Builds your forearms for grip strength. 4 sets.'},
-    {name:'5lb Wrist Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Palms up -- forearm and grip builder',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Sit on chair, forearms on thighs, palms UP. Let weights roll to fingertips then curl wrists up as high as possible. Lower slowly. Grip strength is a pull-up limiter -- build it every session. 4 sets.'},
-    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core strength carries into every pull-up and hang',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Add 5 seconds every week.'},
+    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core and shoulder stability -- hold strong',how:'Hands on floor arms straight. Body in a straight line. Core squeezed. 45-60 seconds. Shoulder stability directly helps your push-up strength.'},
     {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
-    {name:'5lb Bicep Curl Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- curl until nothing works -- log it',how:'Curl both weights as many times as possible. When you cannot do full reps do partial reps halfway up. Keep going until absolutely nothing moves. Write the number.'}
+    {name:'5lb Shoulder Press Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- press until your arms give out',how:'Same as your regular shoulder press. Go until you literally cannot press the weights overhead anymore.'}
   ]},
   {day:'Power Day',label:'FULL POWER',emoji:'&#128640;',color:'#7C4DFF',focus:'Full Body - Board Max - Scapula Test',hasPullPrac:true,
    warmup:{name:'Jump Rope',reps:'600 jumps',note:'Extra 100 today -- push your pace'},
    cardio:{name:'High Knees',reps:'4 x 30 sec',note:'Extra effort today -- drive those knees -- earn it'},
    cooldown:'10 min easy walk + full body stretch -- you earned it',pushStretches:true,
    exercises:[
-    {name:'Mountain Climbers',sets:'4',reps:'35 sec',badge:'',note:'Hips LOW -- drive knees as fast as possible',how:'Plank on your hands. Drive one knee toward chest then quickly switch. As fast as possible for 35 seconds. Hips stay low. No bouncing. 20 sec rest between sets.'},
-    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both arms -- squeeze hard at top -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to hips. Squeeze shoulder blades hard. Lower in 3 seconds. 4 sets.'},
-    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- slow lowering builds the muscle',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
+    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Both arms -- biggest lift today, do it first',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to hips. Squeeze shoulder blades hard. Lower in 3 seconds. 4 sets.'},
     {name:'5lb Lateral Raise',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- shoulders on fire by rep 15',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides. Raise both arms to shoulder height. Lower in 4 seconds. By rep 15 they should be burning.'},
+    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down -- slow lowering builds the muscle',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
+    {name:'Mountain Climbers',sets:'4',reps:'35 sec',badge:'',note:'Hips LOW -- drive knees as fast as possible',how:'Plank on your hands. Drive one knee toward chest then quickly switch. As fast as possible for 35 seconds. Hips stay low. No bouncing. 20 sec rest between sets.'},
     {name:'Plank Hold',sets:'3',reps:'60 sec',badge:'',note:'Power day target -- 60 seconds -- hit it every week',how:'Hands on floor arms straight. Body in a straight line. Core as tight as possible. 60 second target. This is the hardest plank of the week. Hit 60 and then try to beat it.'},
     {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
-    {name:'Full Body Burnout',sets:'1',reps:'Max -- log total',badge:'burnout',note:'Push-ups then Rows then Mountain Climbers -- no rest -- log total',how:'Floor push-ups to failure, immediately bent-over rows to failure, immediately mountain climbers for 30 seconds. Count every single rep and movement. Write the total in the tracker. This is your weekly power benchmark.'}
+    {name:'Full Body Burnout',sets:'1',reps:'Max',badge:'burnout',note:'Push-ups then Rows then Mountain Climbers -- no rest',how:'Floor push-ups to failure, immediately bent-over rows to failure, immediately mountain climbers for 30 seconds. Count every single rep and movement. This is your weekly power benchmark.'}
   ]},
-  {day:'Rest Day',label:'SLOW AND CHILL',emoji:'&#128524;',color:'#F06292',focus:'Light Movement - Scapula Hangs - Height Stretches',hasPullPrac:true,
+  {day:'Strength Day',label:'FULL STRENGTH',emoji:'&#127947;',color:'#00B0FF',focus:'Heavy 5lb Sets - Full Body Strength',hasPullPrac:false,
+   warmup:{name:'Jump Rope',reps:'500 jumps',note:'Steady pace -- get the whole body warm'},
+   cardio:{name:'High Knees',reps:'3 x 30 sec',note:'Drive knees up to hip height -- arms pumping'},
+   cooldown:'5 min easy walk + full body stretch',pushStretches:false,
+   exercises:[
+    {name:'Jumping Jacks',sets:'3',reps:'30 sec',badge:'',note:'Extra cardio burst -- full range, steady pace',how:'Stand with feet together, arms at sides. Jump feet out wide while raising both arms overhead at the same time. Jump back to start. Keep a steady rhythm for 30 seconds. 3 sets with 20 sec rest between. Gets your heart rate up before the heavy strength work.'},
+    {name:'5lb Squat to Press',sets:'4',reps:'15',badge:'weight',note:'SLOW -- Main strength builder today -- do this first',how:'SLOW AND CONTROLLED -- 3 seconds down on the squat, controlled press up. Weights at shoulder height. Squat down slowly. As you drive up to standing press both weights overhead at the same time. Lower weights back to shoulders as you squat again. 4 sets of 15.'},
+    {name:'5lb Romanian Deadlift',sets:'4',reps:'15',badge:'weight',note:'SLOW -- Hinge at hips -- feel hamstrings stretch -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause, 2 seconds up. Stand holding both weights in front of your thighs. Push your hips straight back while sliding the weights down your legs, keeping your back flat. Stop at a deep stretch in the back of your thighs. Drive your hips forward to stand back up. 4 sets of 15.'},
+    {name:'5lb Chest Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Floor press -- 3 sec down, squeeze at top',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Lie on your back, 5lb weights at chest height. Lower in 3 seconds. Press straight up until arms lock. Squeeze your chest hard at the top. 4 sets.'},
+    {name:'5lb Bent-Over Row',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Main back builder -- 3 sec down',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Hinge forward, both weights hanging. Pull both elbows back to your hips. Squeeze shoulder blades hard at the top. Lower in 3 full seconds. 4 sets.'},
+    {name:'5lb Shoulder Press',sets:'4',reps:'20',badge:'weight',note:'SLOW -- Press overhead -- 3 sec down -- core tight',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at shoulder height palms forward. Press both straight up. Lower in 3 seconds. Core tight -- no arching your back. 4 sets.'},
+    {name:'5lb Bicep Curl',sets:'4',reps:'20',badge:'weight',note:'SLOW -- 4 sec down every rep -- elbows pinned to sides',how:'SLOW AND CONTROLLED -- 3 seconds down, pause 1 second, 2 seconds up. Weights at sides palms forward elbows pinned. Curl both up. Squeeze hard. Lower in 4 full seconds. Never swing your elbows. 4 sets.'},
+    {name:'Plank Hold',sets:'3',reps:'45-60 sec',badge:'',note:'Core iron tight -- add 5 sec every week',how:'Hands on floor arms straight. Body perfectly straight from head to heels. Squeeze everything. 45-60 seconds. Add 5 seconds every week.'},
+    {name:'Bodyweight Squat',sets:'1',reps:'10',badge:'',note:'Basic form work -- just 1 easy set -- nothing heavy',how:'Feet shoulder-width, toes slightly out. Arms out for balance. Sit back and down until thighs are about parallel to the floor. Drive through your heels to stand. Keep your chest up and knees tracking over your toes. Just 1 easy set, focus on form.'},
+    {name:'5lb Squat to Press Burnout',sets:'1',reps:'Max to failure',badge:'burnout',note:'Final set -- go until you cannot complete another full rep',how:'Same movement as your regular squat to press. Keep going until your form starts to break down or you simply cannot do another rep. This is your weekly strength benchmark.'}
+  ]},
+  {day:'Rest Day',label:'SLOW AND CHILL',emoji:'&#128524;',color:'#F06292',focus:'Light Movement - Scapula Hangs - 10 Push-Ups',hasPullPrac:true,
    warmup:{name:'Easy Walk',reps:'5 min',note:'No intensity -- just get blood moving'},
    cardio:{name:'Easy Walk',reps:'10-15 min',note:'Outside if possible -- fresh air and easy movement'},
    cooldown:'Legs up the wall 5 min -- best recovery position there is',pushStretches:false,
    exercises:[
+    {name:'Easy Jumping Jacks',sets:'2',reps:'20 slow',badge:'',note:'Extra light movement -- not a workout -- just blood flow',how:'Slow easy jumping jacks. 20 reps at a comfortable, relaxed pace. This is not meant to be hard at all -- just a little extra light movement to help your body recover faster on rest day.'},
     {name:'5lb Shoulder Circles',sets:'2',reps:'10 each way',badge:'weight',note:'SLOW -- Keeps shoulder joints healthy after a hard week',how:'SLOW AND CONTROLLED -- smooth circles, no rushing. Weights at sides. Large slow circles forward 10 times then backward 10 times. Smooth and controlled. Keeps your shoulders feeling good.'},
     {name:'5lb Lateral Raise',sets:'2',reps:'10',badge:'weight',note:'Light and easy -- slow and relaxed -- just keeping blood flowing',how:'SLOW AND CONTROLLED -- 3 seconds down, pause, 2 seconds up. Weights at sides. Raise both arms out to shoulder height slowly. Lower slowly. Nothing hard today. Just moving blood through your muscles so they recover faster.'}
   ]}
 ];
 
 var expEx=null,expPush=null,expPull=null,activeDay=0;
+
+function mkPreworkout(di,c){
+  var pw=PREWORKOUT[di];
+  if(!pw)return'';
+  var steps='';
+  pw.steps.forEach(function(s,i){
+    steps+='<div class="pw-step"><div class="pw-num" style="background:'+ha(c,.15)+';color:'+c+'">'+(i+1)+'</div><div class="pw-body"><div class="pw-name" style="color:'+c+'">'+s.name+'</div><div class="pw-detail">'+s.detail+'</div></div></div>';
+  });
+  return '<div class="preworkout-wrap" style="background:'+ha(c,.04)+';border-color:'+ha(c,.3)+'"><div class="pw-header"><div class="pw-icon">'+pw.emoji+'</div><div><div class="pw-title" style="color:'+c+'">'+pw.title+'</div><div class="pw-sub">'+pw.sub+'</div></div></div><div class="pw-steps">'+steps+'</div></div>';
+}
 
 function renderTabs(){
   var h='';
@@ -465,8 +460,11 @@ function render(){
   document.getElementById('caname').textContent=d.cardio.name;
   document.getElementById('careps').textContent=d.cardio.reps;
   document.getElementById('canote').textContent=d.cardio.note;
-  renderMotBanner(c);
-  var pullDays=[1,2,4,5,6];
+
+  /* Pre-workout */
+  document.getElementById('preworkout-section').innerHTML=mkPreworkout(di,c);
+
+  var pullDays=[1,2,3,4,6];
   document.getElementById('progbox').innerHTML=pullDays.indexOf(di)>=0?mkPullProg(c):'';
   var pullSec=document.getElementById('pullsection');
   var ppd=PULL_PRACTICE[di];
